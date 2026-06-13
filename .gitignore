@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv_x86/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+*.tsbuildinfo
+
+data/*.csv
+models/*.joblib
+outputs/*
+
+!.gitkeep

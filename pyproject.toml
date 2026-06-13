@@ -1,0 +1,19 @@
+[project]
+name = "worldcup-predictor-v2"
+version = "0.1.0"
+description = "Hybrid World Cup match prediction system using XGBoost and Poisson score models."
+requires-python = ">=3.10"
+dependencies = [
+  "joblib>=1.3",
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scikit-learn>=1.3",
+  "xgboost>=2.0"
+]
+
+[tool.pyright]
+include = ["worldcup_predictor", "scripts"]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "basic"
+reportMissingTypeStubs = "none"

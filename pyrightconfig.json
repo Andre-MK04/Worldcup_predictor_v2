@@ -1,0 +1,18 @@
+{
+  "include": [
+    "worldcup_predictor",
+    "scripts"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": [
+        "."
+      ]
+    }
+  ],
+  "typeCheckingMode": "basic",
+  "reportMissingTypeStubs": "none"
+}
