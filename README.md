@@ -78,6 +78,21 @@ This writes:
 
 Metrics include 1X2 accuracy, draw accuracy, favorite accuracy, exact score accuracy, over/under 2.5 accuracy, Brier score, log loss, and calibration buckets.
 
+## Deploy Dashboard on Vercel
+
+The deployable web app is the Vite dashboard in `frontend/`. The Python package in
+the repo root is model/training code and is not a Vercel Python function.
+
+This repo includes `vercel.json` so Vercel builds the dashboard with:
+
+- Install command: `cd frontend && npm ci`
+- Build command: `cd frontend && npm run build`
+- Output directory: `frontend/dist`
+
+If the Vercel project settings were created before this config, make sure the
+Framework Preset is Vite and the Root Directory is the repository root, or set
+the Root Directory to `frontend` and use Vercel's default Vite settings.
+
 ## Notes
 
 Install `xgboost` for the requested XGBoost model. If it is not installed, training still runs with the fallback classifier and reports `sklearn_hist_gradient_boosting_fallback` as the model type.
