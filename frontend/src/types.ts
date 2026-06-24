@@ -1,5 +1,5 @@
 export type FormResult = "W" | "D" | "L";
-export type AppView = "predictions" | "groups" | "team" | "model" | "backtesting";
+export type AppView = "predictions" | "groups" | "team" | "model" | "backtesting" | "performance";
 export type FixtureStatus = "scheduled" | "live" | "completed" | "postponed";
 export type PredictionOutcome = "home_win" | "draw" | "away_win";
 export type FixtureStage =
@@ -193,4 +193,104 @@ export interface GroupStanding {
   goalsAgainst: number;
   goalDifference: number;
   points: number;
+}
+
+export interface LiveGroupStanding {
+  group: WorldCupGroup | string;
+  country: string;
+  played: string;
+  wins: string;
+  draws: string;
+  losses: string;
+  goals_for: string;
+  goals_against: string;
+  goal_difference: string;
+  points: string;
+  rank: string;
+  qualification_status: string;
+}
+
+export interface RefreshStatus {
+  refreshed_at: string | null;
+  data_source?: string;
+  matches_total: number;
+  matches_complete: number;
+  matches_live: number;
+  matches_scheduled: number;
+  results_updated: number;
+  standings_updated: boolean;
+  evaluation_updated: boolean;
+  snapshots_created?: number;
+  evaluated_matches?: number;
+  not_eligible_matches?: number;
+  warnings: string[];
+}
+
+export interface PerformanceSummary {
+  evaluated_matches: number;
+  not_eligible_matches: number;
+  correct_result_predictions: number;
+  result_accuracy: number | null;
+  exact_scoreline_correct: number;
+  exact_scoreline_accuracy: number | null;
+  top_5_scoreline_hits: number;
+  top_5_scoreline_accuracy: number | null;
+  goal_mae_team_a: number | null;
+  goal_mae_team_b: number | null;
+  total_goals_mae: number | null;
+  over_2_5_accuracy: number | null;
+  both_teams_to_score_accuracy: number | null;
+  draw_precision: number | null;
+  draw_recall: number | null;
+  log_loss: number | null;
+  brier_score: number | null;
+  confidence_buckets?: Array<{
+    bucket: string;
+    matches: number;
+    accuracy: number | null;
+  }>;
+  message?: string;
+}
+
+export interface MatchEvaluation {
+  match_id: string;
+  date: string;
+  team_a: string;
+  team_b: string;
+  eligible_for_evaluation: string;
+  ineligibility_reason: string;
+  actual_score: string;
+  actual_result_label: string;
+  predicted_result_label: string;
+  predicted_winner_country: string;
+  p_team_a_win: string;
+  p_draw: string;
+  p_team_b_win: string;
+  prediction_correct: string;
+  expected_goals_team_a: string;
+  expected_goals_team_b: string;
+  actual_goals_team_a: string;
+  actual_goals_team_b: string;
+  goal_error_team_a: string;
+  goal_error_team_b: string;
+  expected_total_goals: string;
+  actual_total_goals: string;
+  total_goals_error: string;
+  most_likely_single_scoreline: string;
+  exact_scoreline_correct: string;
+  actual_score_in_top_3: string;
+  actual_score_in_top_5: string;
+  predicted_over_2_5: string;
+  actual_over_2_5: string;
+  over_2_5_correct: string;
+  predicted_btts: string;
+  actual_btts: string;
+  btts_correct: string;
+  confidence_label: string;
+  snapshot_used_at: string;
+}
+
+export interface EvaluationPayload {
+  summary: PerformanceSummary;
+  matches: MatchEvaluation[];
 }

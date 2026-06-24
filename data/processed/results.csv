@@ -1,0 +1,49 @@
+match_id,date,group,stage,team_a,team_b,status,team_a_goals,team_b_goals,winner_country,result_label,total_goals,both_teams_scored,over_2_5,updated_at
+MEX-RSA-2026-06-11,2026-06-11,A,group,Mexico,South Africa,complete,2,0,Mexico,team_a_win,2,false,false,2026-06-24T00:57:00+00:00
+KOR-CZE-2026-06-11,2026-06-11,A,group,South Korea,Czechia,complete,2,1,South Korea,team_a_win,3,true,true,2026-06-24T00:57:00+00:00
+CAN-BIH-2026-06-12,2026-06-12,B,group,Canada,Bosnia and Herzegovina,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+USA-PAR-2026-06-12,2026-06-12,D,group,United States,Paraguay,complete,4,1,United States,team_a_win,5,true,true,2026-06-24T00:57:00+00:00
+BRA-MAR-2026-06-13,2026-06-13,C,group,Brazil,Morocco,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+HAI-SCO-2026-06-13,2026-06-13,C,group,Haiti,Scotland,complete,0,1,Scotland,team_b_win,1,false,false,2026-06-24T00:57:00+00:00
+GER-CUW-2026-06-14,2026-06-14,E,group,Germany,Curaçao,complete,7,1,Germany,team_a_win,8,true,true,2026-06-24T00:57:00+00:00
+NED-JPN-2026-06-14,2026-06-14,F,group,Netherlands,Japan,complete,2,2,Draw,draw,4,true,true,2026-06-24T00:57:00+00:00
+CIV-ECU-2026-06-14,2026-06-14,E,group,Côte d'Ivoire,Ecuador,complete,1,0,Côte d'Ivoire,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+SWE-TUN-2026-06-14,2026-06-14,F,group,Sweden,Tunisia,complete,5,1,Sweden,team_a_win,6,true,true,2026-06-24T00:57:00+00:00
+ESP-CPV-2026-06-15,2026-06-15,H,group,Spain,Cabo Verde,complete,0,0,Draw,draw,0,false,false,2026-06-24T00:57:00+00:00
+BEL-EGY-2026-06-15,2026-06-15,G,group,Belgium,Egypt,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+KSA-URU-2026-06-15,2026-06-15,H,group,Saudi Arabia,Uruguay,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+IRN-NZL-2026-06-15,2026-06-15,G,group,IR Iran,New Zealand,complete,2,2,Draw,draw,4,true,true,2026-06-24T00:57:00+00:00
+FRA-SEN-2026-06-16,2026-06-16,I,group,France,Senegal,complete,3,1,France,team_a_win,4,true,true,2026-06-24T00:57:00+00:00
+IRQ-NOR-2026-06-16,2026-06-16,I,group,Iraq,Norway,complete,1,4,Norway,team_b_win,5,true,true,2026-06-24T00:57:00+00:00
+ARG-ALG-2026-06-16,2026-06-16,J,group,Argentina,Algeria,complete,3,0,Argentina,team_a_win,3,false,true,2026-06-24T00:57:00+00:00
+POR-COD-2026-06-17,2026-06-17,K,group,Portugal,Congo DR,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+ENG-CRO-2026-06-17,2026-06-17,L,group,England,Croatia,complete,4,2,England,team_a_win,6,true,true,2026-06-24T00:57:00+00:00
+GHA-PAN-2026-06-17,2026-06-17,L,group,Ghana,Panama,complete,1,0,Ghana,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+UZB-COL-2026-06-17,2026-06-17,K,group,Uzbekistan,Colombia,complete,1,3,Colombia,team_b_win,4,true,true,2026-06-24T00:57:00+00:00
+CZE-RSA-2026-06-18,2026-06-18,A,group,Czechia,South Africa,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+SUI-BIH-2026-06-18,2026-06-18,B,group,Switzerland,Bosnia and Herzegovina,complete,4,1,Switzerland,team_a_win,5,true,true,2026-06-24T00:57:00+00:00
+CAN-QAT-2026-06-18,2026-06-18,B,group,Canada,Qatar,complete,6,0,Canada,team_a_win,6,false,true,2026-06-24T00:57:00+00:00
+MEX-KOR-2026-06-18,2026-06-18,A,group,Mexico,South Korea,complete,1,0,Mexico,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+USA-AUS-2026-06-19,2026-06-19,D,group,United States,Australia,complete,2,0,United States,team_a_win,2,false,false,2026-06-24T00:57:00+00:00
+MAR-SCO-2026-06-19,2026-06-19,C,group,Morocco,Scotland,complete,1,0,Morocco,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+HAI-BRA-2026-06-19,2026-06-19,C,group,Haiti,Brazil,complete,0,3,Brazil,team_b_win,3,false,true,2026-06-24T00:57:00+00:00
+TUR-PAR-2026-06-19,2026-06-19,D,group,Türkiye,Paraguay,complete,0,1,Paraguay,team_b_win,1,false,false,2026-06-24T00:57:00+00:00
+NED-SWE-2026-06-20,2026-06-20,F,group,Netherlands,Sweden,complete,5,1,Netherlands,team_a_win,6,true,true,2026-06-24T00:57:00+00:00
+TUN-JPN-2026-06-20,2026-06-20,F,group,Tunisia,Japan,complete,0,4,Japan,team_b_win,4,false,true,2026-06-24T00:57:00+00:00
+CPV-URU-2026-06-21,2026-06-21,H,group,Cabo Verde,Uruguay,complete,2,2,Draw,draw,4,true,true,2026-06-24T00:57:00+00:00
+EGY-NZL-2026-06-21,2026-06-21,G,group,Egypt,New Zealand,complete,3,1,Egypt,team_a_win,4,true,true,2026-06-24T00:57:00+00:00
+ARG-AUT-2026-06-22,2026-06-22,J,group,Argentina,Austria,complete,2,0,Argentina,team_a_win,2,false,false,2026-06-24T00:57:00+00:00
+FRA-IRQ-2026-06-22,2026-06-22,I,group,France,Iraq,complete,3,0,France,team_a_win,3,false,true,2026-06-24T00:57:00+00:00
+NOR-SEN-2026-06-22,2026-06-22,I,group,Norway,Senegal,complete,3,2,Norway,team_a_win,5,true,true,2026-06-24T00:57:00+00:00
+JOR-ALG-2026-06-22,2026-06-22,J,group,Jordan,Algeria,complete,1,2,Algeria,team_b_win,3,true,true,2026-06-24T00:57:00+00:00
+POR-UZB-2026-06-23,2026-06-23,K,group,Portugal,Uzbekistan,complete,5,0,Portugal,team_a_win,5,false,true,2026-06-24T00:57:00+00:00
+CRO-PAN-2026-06-23,2026-06-23,L,group,Croatia,Panama,complete,1,0,Croatia,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+COL-COD-2026-06-23,2026-06-23,K,group,Colombia,Congo DR,complete,1,0,Colombia,team_a_win,1,false,false,2026-06-24T00:57:00+00:00
+QAT-SUI-2026-06-13,2026-06-13,B,group,Qatar,Switzerland,complete,1,1,Draw,draw,2,true,false,2026-06-24T00:57:00+00:00
+AUS-TUR-2026-06-14,2026-06-14,D,group,Australia,Türkiye,complete,2,0,Australia,team_a_win,2,false,false,2026-06-24T00:57:00+00:00
+AUT-JOR-2026-06-17,2026-06-17,J,group,Austria,Jordan,complete,3,1,Austria,team_a_win,4,true,true,2026-06-24T00:57:00+00:00
+GER-CIV-2026-06-20,2026-06-20,E,group,Germany,Côte d'Ivoire,complete,2,1,Germany,team_a_win,3,true,true,2026-06-24T00:57:00+00:00
+ECU-CUW-2026-06-20,2026-06-20,E,group,Ecuador,Curaçao,complete,0,0,Draw,draw,0,false,false,2026-06-24T00:57:00+00:00
+ESP-KSA-2026-06-21,2026-06-21,H,group,Spain,Saudi Arabia,complete,4,0,Spain,team_a_win,4,false,true,2026-06-24T00:57:00+00:00
+BEL-IRN-2026-06-21,2026-06-21,G,group,Belgium,IR Iran,complete,0,0,Draw,draw,0,false,false,2026-06-24T00:57:00+00:00
+ENG-GHA-2026-06-23,2026-06-23,L,group,England,Ghana,complete,0,0,Draw,draw,0,false,false,2026-06-24T00:57:00+00:00

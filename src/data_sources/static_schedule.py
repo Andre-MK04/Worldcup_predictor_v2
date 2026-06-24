@@ -1,0 +1,103 @@
+from __future__ import annotations
+
+
+GROUP_SCHEDULE_SEEDS = [
+    ("A", ["2026-06-11", "2026-06-18", "2026-06-24"], ["MEX", "RSA", "KOR", "CZE"]),
+    ("B", ["2026-06-12", "2026-06-18", "2026-06-24"], ["CAN", "BIH", "QAT", "SUI"]),
+    ("C", ["2026-06-13", "2026-06-19", "2026-06-24"], ["HAI", "SCO", "BRA", "MAR"]),
+    ("D", ["2026-06-12", "2026-06-19", "2026-06-25"], ["USA", "PAR", "AUS", "TUR"]),
+    ("E", ["2026-06-14", "2026-06-20", "2026-06-25"], ["CIV", "ECU", "GER", "CUW"]),
+    ("F", ["2026-06-14", "2026-06-20", "2026-06-25"], ["NED", "JPN", "SWE", "TUN"]),
+    ("G", ["2026-06-15", "2026-06-21", "2026-06-26"], ["IRN", "NZL", "BEL", "EGY"]),
+    ("H", ["2026-06-15", "2026-06-21", "2026-06-26"], ["KSA", "URU", "ESP", "CPV"]),
+    ("I", ["2026-06-16", "2026-06-22", "2026-06-26"], ["FRA", "SEN", "IRQ", "NOR"]),
+    ("J", ["2026-06-16", "2026-06-22", "2026-06-27"], ["ARG", "ALG", "AUT", "JOR"]),
+    ("K", ["2026-06-17", "2026-06-23", "2026-06-27"], ["POR", "COD", "UZB", "COL"]),
+    ("L", ["2026-06-17", "2026-06-23", "2026-06-27"], ["GHA", "PAN", "ENG", "CRO"]),
+]
+
+TEAM_NAMES = {
+    "MEX": "Mexico",
+    "RSA": "South Africa",
+    "KOR": "South Korea",
+    "CZE": "Czechia",
+    "CAN": "Canada",
+    "BIH": "Bosnia and Herzegovina",
+    "QAT": "Qatar",
+    "SUI": "Switzerland",
+    "HAI": "Haiti",
+    "SCO": "Scotland",
+    "BRA": "Brazil",
+    "MAR": "Morocco",
+    "USA": "United States",
+    "PAR": "Paraguay",
+    "AUS": "Australia",
+    "TUR": "Türkiye",
+    "CIV": "Côte d'Ivoire",
+    "ECU": "Ecuador",
+    "GER": "Germany",
+    "CUW": "Curaçao",
+    "NED": "Netherlands",
+    "JPN": "Japan",
+    "SWE": "Sweden",
+    "TUN": "Tunisia",
+    "IRN": "IR Iran",
+    "NZL": "New Zealand",
+    "BEL": "Belgium",
+    "EGY": "Egypt",
+    "KSA": "Saudi Arabia",
+    "URU": "Uruguay",
+    "ESP": "Spain",
+    "CPV": "Cabo Verde",
+    "FRA": "France",
+    "SEN": "Senegal",
+    "IRQ": "Iraq",
+    "NOR": "Norway",
+    "ARG": "Argentina",
+    "ALG": "Algeria",
+    "AUT": "Austria",
+    "JOR": "Jordan",
+    "POR": "Portugal",
+    "COD": "Congo DR",
+    "UZB": "Uzbekistan",
+    "COL": "Colombia",
+    "GHA": "Ghana",
+    "PAN": "Panama",
+    "ENG": "England",
+    "CRO": "Croatia",
+}
+
+OFFICIAL_GROUP_PAIRINGS = [
+    ((0, 1), 0),
+    ((2, 3), 0),
+    ((0, 2), 1),
+    ((3, 1), 1),
+    ((3, 0), 2),
+    ((1, 2), 2),
+]
+
+
+def build_static_group_fixtures() -> list[dict[str, str]]:
+    fixtures: list[dict[str, str]] = []
+    for group_index, (group, dates, positions) in enumerate(GROUP_SCHEDULE_SEEDS):
+        for pairing_index, (pair, matchday) in enumerate(OFFICIAL_GROUP_PAIRINGS):
+            team_a = positions[pair[0]]
+            team_b = positions[pair[1]]
+            fixtures.append(
+                {
+                    "match_id": f"{team_a}-{team_b}-{dates[matchday]}",
+                    "date": dates[matchday],
+                    "kickoff_time": "12:00",
+                    "group": group,
+                    "stage": "group",
+                    "team_a": TEAM_NAMES[team_a],
+                    "team_b": TEAM_NAMES[team_b],
+                    "team_a_code": team_a,
+                    "team_b_code": team_b,
+                    "venue": "",
+                    "status": "scheduled",
+                    "is_neutral_venue": "true",
+                    "fifa_match_number": str(group_index * 6 + pairing_index + 1),
+                }
+            )
+    return fixtures

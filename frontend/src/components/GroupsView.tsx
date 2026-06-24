@@ -1,16 +1,17 @@
-import type { GroupStanding, Prediction, Team, WorldCupMatch } from "../types";
+import type { GroupStanding, LiveGroupStanding, Prediction, Team, WorldCupMatch } from "../types";
 import { calculateGroupStandings } from "../utils";
 
 interface GroupsViewProps {
   matches: WorldCupMatch[];
   teams: Team[];
   predictions: Prediction[];
+  liveStandings?: LiveGroupStanding[] | null;
   selectedTeamCode?: string;
   onSelectTeam: (teamCode: string) => void;
 }
 
-export function GroupsView({ matches, teams, predictions, selectedTeamCode, onSelectTeam }: GroupsViewProps) {
-  const standings = calculateGroupStandings(matches, teams);
+export function GroupsView({ matches, teams, predictions, liveStandings, selectedTeamCode, onSelectTeam }: GroupsViewProps) {
+  const standings = liveStandings?.length ? mapLiveStandings(liveStandings, teams) : calculateGroupStandings(matches, teams);
   const groups = Object.keys(standings).sort();
   const selectedTeam = selectedTeamCode ? teams.find((team) => team.code === selectedTeamCode) : undefined;
   const selectedStanding = selectedTeam
@@ -24,6 +25,7 @@ export function GroupsView({ matches, teams, predictions, selectedTeamCode, onSe
         <h2>Group standings, fixtures and team paths</h2>
         <p className="page-intro">
           Tables use completed matches only. Future fixtures remain in the prediction layer until a result is available.
+          {liveStandings?.length ? " Live API standings are connected." : " Static standings are shown until the live API returns standings."}
         </p>
         <div className="group-table-stack">
           {groups.map((group) => (
@@ -45,6 +47,44 @@ export function GroupsView({ matches, teams, predictions, selectedTeamCode, onSe
       />
     </main>
   );
+}
+
+function mapLiveStandings(rows: LiveGroupStanding[], teams: Team[]) {
+  const teamByName = new Map(teams.map((team) => [team.name, team]));
+  const standings = rows.reduce<Record<string, GroupStanding[]>>((groups, row) => {
+    const team = teamByName.get(row.country);
+    if (!team) return groups;
+    const group = String(row.group);
+    groups[group] = groups[group] ?? [];
+    groups[group].push({
+      team,
+      played: toNumber(row.played),
+      wins: toNumber(row.wins),
+      draws: toNumber(row.draws),
+      losses: toNumber(row.losses),
+      goalsFor: toNumber(row.goals_for),
+      goalsAgainst: toNumber(row.goals_against),
+      goalDifference: toNumber(row.goal_difference),
+      points: toNumber(row.points),
+    });
+    return groups;
+  }, {});
+
+  Object.values(standings).forEach((groupRows) => {
+    groupRows.sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
+      if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
+      return a.team.name.localeCompare(b.team.name);
+    });
+  });
+
+  return standings;
+}
+
+function toNumber(value: string) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 function GroupTable({

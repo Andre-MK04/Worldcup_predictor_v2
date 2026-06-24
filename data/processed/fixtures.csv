@@ -1,0 +1,73 @@
+match_id,date,kickoff_time,group,stage,team_a,team_b,team_a_code,team_b_code,venue,status,is_neutral_venue,fifa_match_number
+MEX-RSA-2026-06-11,2026-06-11,12:00,A,group,Mexico,South Africa,MEX,RSA,,scheduled,true,1
+KOR-CZE-2026-06-11,2026-06-11,12:00,A,group,South Korea,Czechia,KOR,CZE,,scheduled,true,2
+MEX-KOR-2026-06-18,2026-06-18,12:00,A,group,Mexico,South Korea,MEX,KOR,,scheduled,true,3
+CZE-RSA-2026-06-18,2026-06-18,12:00,A,group,Czechia,South Africa,CZE,RSA,,scheduled,true,4
+CZE-MEX-2026-06-24,2026-06-24,12:00,A,group,Czechia,Mexico,CZE,MEX,,scheduled,true,5
+RSA-KOR-2026-06-24,2026-06-24,12:00,A,group,South Africa,South Korea,RSA,KOR,,scheduled,true,6
+CAN-BIH-2026-06-12,2026-06-12,12:00,B,group,Canada,Bosnia and Herzegovina,CAN,BIH,,scheduled,true,7
+QAT-SUI-2026-06-12,2026-06-12,12:00,B,group,Qatar,Switzerland,QAT,SUI,,scheduled,true,8
+CAN-QAT-2026-06-18,2026-06-18,12:00,B,group,Canada,Qatar,CAN,QAT,,scheduled,true,9
+SUI-BIH-2026-06-18,2026-06-18,12:00,B,group,Switzerland,Bosnia and Herzegovina,SUI,BIH,,scheduled,true,10
+SUI-CAN-2026-06-24,2026-06-24,12:00,B,group,Switzerland,Canada,SUI,CAN,,scheduled,true,11
+BIH-QAT-2026-06-24,2026-06-24,12:00,B,group,Bosnia and Herzegovina,Qatar,BIH,QAT,,scheduled,true,12
+HAI-SCO-2026-06-13,2026-06-13,12:00,C,group,Haiti,Scotland,HAI,SCO,,scheduled,true,13
+BRA-MAR-2026-06-13,2026-06-13,12:00,C,group,Brazil,Morocco,BRA,MAR,,scheduled,true,14
+HAI-BRA-2026-06-19,2026-06-19,12:00,C,group,Haiti,Brazil,HAI,BRA,,scheduled,true,15
+MAR-SCO-2026-06-19,2026-06-19,12:00,C,group,Morocco,Scotland,MAR,SCO,,scheduled,true,16
+MAR-HAI-2026-06-24,2026-06-24,12:00,C,group,Morocco,Haiti,MAR,HAI,,scheduled,true,17
+SCO-BRA-2026-06-24,2026-06-24,12:00,C,group,Scotland,Brazil,SCO,BRA,,scheduled,true,18
+USA-PAR-2026-06-12,2026-06-12,12:00,D,group,United States,Paraguay,USA,PAR,,scheduled,true,19
+AUS-TUR-2026-06-12,2026-06-12,12:00,D,group,Australia,Türkiye,AUS,TUR,,scheduled,true,20
+USA-AUS-2026-06-19,2026-06-19,12:00,D,group,United States,Australia,USA,AUS,,scheduled,true,21
+TUR-PAR-2026-06-19,2026-06-19,12:00,D,group,Türkiye,Paraguay,TUR,PAR,,scheduled,true,22
+TUR-USA-2026-06-25,2026-06-25,12:00,D,group,Türkiye,United States,TUR,USA,,scheduled,true,23
+PAR-AUS-2026-06-25,2026-06-25,12:00,D,group,Paraguay,Australia,PAR,AUS,,scheduled,true,24
+CIV-ECU-2026-06-14,2026-06-14,12:00,E,group,Côte d'Ivoire,Ecuador,CIV,ECU,,scheduled,true,25
+GER-CUW-2026-06-14,2026-06-14,12:00,E,group,Germany,Curaçao,GER,CUW,,scheduled,true,26
+CIV-GER-2026-06-20,2026-06-20,12:00,E,group,Côte d'Ivoire,Germany,CIV,GER,,scheduled,true,27
+CUW-ECU-2026-06-20,2026-06-20,12:00,E,group,Curaçao,Ecuador,CUW,ECU,,scheduled,true,28
+CUW-CIV-2026-06-25,2026-06-25,12:00,E,group,Curaçao,Côte d'Ivoire,CUW,CIV,,scheduled,true,29
+ECU-GER-2026-06-25,2026-06-25,12:00,E,group,Ecuador,Germany,ECU,GER,,scheduled,true,30
+NED-JPN-2026-06-14,2026-06-14,12:00,F,group,Netherlands,Japan,NED,JPN,,scheduled,true,31
+SWE-TUN-2026-06-14,2026-06-14,12:00,F,group,Sweden,Tunisia,SWE,TUN,,scheduled,true,32
+NED-SWE-2026-06-20,2026-06-20,12:00,F,group,Netherlands,Sweden,NED,SWE,,scheduled,true,33
+TUN-JPN-2026-06-20,2026-06-20,12:00,F,group,Tunisia,Japan,TUN,JPN,,scheduled,true,34
+TUN-NED-2026-06-25,2026-06-25,12:00,F,group,Tunisia,Netherlands,TUN,NED,,scheduled,true,35
+JPN-SWE-2026-06-25,2026-06-25,12:00,F,group,Japan,Sweden,JPN,SWE,,scheduled,true,36
+IRN-NZL-2026-06-15,2026-06-15,12:00,G,group,IR Iran,New Zealand,IRN,NZL,,scheduled,true,37
+BEL-EGY-2026-06-15,2026-06-15,12:00,G,group,Belgium,Egypt,BEL,EGY,,scheduled,true,38
+IRN-BEL-2026-06-21,2026-06-21,12:00,G,group,IR Iran,Belgium,IRN,BEL,,scheduled,true,39
+EGY-NZL-2026-06-21,2026-06-21,12:00,G,group,Egypt,New Zealand,EGY,NZL,,scheduled,true,40
+EGY-IRN-2026-06-26,2026-06-26,12:00,G,group,Egypt,IR Iran,EGY,IRN,,scheduled,true,41
+NZL-BEL-2026-06-26,2026-06-26,12:00,G,group,New Zealand,Belgium,NZL,BEL,,scheduled,true,42
+KSA-URU-2026-06-15,2026-06-15,12:00,H,group,Saudi Arabia,Uruguay,KSA,URU,,scheduled,true,43
+ESP-CPV-2026-06-15,2026-06-15,12:00,H,group,Spain,Cabo Verde,ESP,CPV,,scheduled,true,44
+KSA-ESP-2026-06-21,2026-06-21,12:00,H,group,Saudi Arabia,Spain,KSA,ESP,,scheduled,true,45
+CPV-URU-2026-06-21,2026-06-21,12:00,H,group,Cabo Verde,Uruguay,CPV,URU,,scheduled,true,46
+CPV-KSA-2026-06-26,2026-06-26,12:00,H,group,Cabo Verde,Saudi Arabia,CPV,KSA,,scheduled,true,47
+URU-ESP-2026-06-26,2026-06-26,12:00,H,group,Uruguay,Spain,URU,ESP,,scheduled,true,48
+FRA-SEN-2026-06-16,2026-06-16,12:00,I,group,France,Senegal,FRA,SEN,,scheduled,true,49
+IRQ-NOR-2026-06-16,2026-06-16,12:00,I,group,Iraq,Norway,IRQ,NOR,,scheduled,true,50
+FRA-IRQ-2026-06-22,2026-06-22,12:00,I,group,France,Iraq,FRA,IRQ,,scheduled,true,51
+NOR-SEN-2026-06-22,2026-06-22,12:00,I,group,Norway,Senegal,NOR,SEN,,scheduled,true,52
+NOR-FRA-2026-06-26,2026-06-26,12:00,I,group,Norway,France,NOR,FRA,,scheduled,true,53
+SEN-IRQ-2026-06-26,2026-06-26,12:00,I,group,Senegal,Iraq,SEN,IRQ,,scheduled,true,54
+ARG-ALG-2026-06-16,2026-06-16,12:00,J,group,Argentina,Algeria,ARG,ALG,,scheduled,true,55
+AUT-JOR-2026-06-16,2026-06-16,12:00,J,group,Austria,Jordan,AUT,JOR,,scheduled,true,56
+ARG-AUT-2026-06-22,2026-06-22,12:00,J,group,Argentina,Austria,ARG,AUT,,scheduled,true,57
+JOR-ALG-2026-06-22,2026-06-22,12:00,J,group,Jordan,Algeria,JOR,ALG,,scheduled,true,58
+JOR-ARG-2026-06-27,2026-06-27,12:00,J,group,Jordan,Argentina,JOR,ARG,,scheduled,true,59
+ALG-AUT-2026-06-27,2026-06-27,12:00,J,group,Algeria,Austria,ALG,AUT,,scheduled,true,60
+POR-COD-2026-06-17,2026-06-17,12:00,K,group,Portugal,Congo DR,POR,COD,,scheduled,true,61
+UZB-COL-2026-06-17,2026-06-17,12:00,K,group,Uzbekistan,Colombia,UZB,COL,,scheduled,true,62
+POR-UZB-2026-06-23,2026-06-23,12:00,K,group,Portugal,Uzbekistan,POR,UZB,,scheduled,true,63
+COL-COD-2026-06-23,2026-06-23,12:00,K,group,Colombia,Congo DR,COL,COD,,scheduled,true,64
+COL-POR-2026-06-27,2026-06-27,12:00,K,group,Colombia,Portugal,COL,POR,,scheduled,true,65
+COD-UZB-2026-06-27,2026-06-27,12:00,K,group,Congo DR,Uzbekistan,COD,UZB,,scheduled,true,66
+GHA-PAN-2026-06-17,2026-06-17,12:00,L,group,Ghana,Panama,GHA,PAN,,scheduled,true,67
+ENG-CRO-2026-06-17,2026-06-17,12:00,L,group,England,Croatia,ENG,CRO,,scheduled,true,68
+GHA-ENG-2026-06-23,2026-06-23,12:00,L,group,Ghana,England,GHA,ENG,,scheduled,true,69
+CRO-PAN-2026-06-23,2026-06-23,12:00,L,group,Croatia,Panama,CRO,PAN,,scheduled,true,70
+CRO-GHA-2026-06-27,2026-06-27,12:00,L,group,Croatia,Ghana,CRO,GHA,,scheduled,true,71
+PAN-ENG-2026-06-27,2026-06-27,12:00,L,group,Panama,England,PAN,ENG,,scheduled,true,72

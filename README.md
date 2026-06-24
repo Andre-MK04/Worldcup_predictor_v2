@@ -93,6 +93,68 @@ If the Vercel project settings were created before this config, make sure the
 Framework Preset is Vite and the Root Directory is the repository root, or set
 the Root Directory to `frontend` and use Vercel's default Vite settings.
 
+## Live Data Refresh and Evaluation
+
+The app now separates schedule, results, predictions, prediction snapshots,
+standings and evaluation data.
+
+Processed files live in `data/processed/`:
+
+- `fixtures.csv`: official match schedule
+- `results.csv`: completed/live match results
+- `predictions.csv`: latest generated predictions, if exported
+- `prediction_snapshots.csv`: historical prediction snapshots
+- `live_group_standings.csv`: standings calculated from completed results only
+
+Evaluation outputs live in `outputs/`:
+
+- `data_refresh_report.json`
+- `model_performance_summary.json`
+- `match_evaluation.csv`
+
+Run a refresh locally:
+
+```bash
+python3 -m src.data_sources.data_refresh
+```
+
+Run the API backend:
+
+```bash
+pip install -r requirements.txt
+uvicorn backend.main:app --reload --port 8000
+```
+
+Then point the dashboard at the backend:
+
+```bash
+cd frontend
+VITE_API_BASE_URL=http://localhost:8000 npm run dev
+```
+
+Optional environment variables:
+
+- `VITE_API_BASE_URL`: frontend API base URL
+- `FOOTBALL_API_PROVIDER`: `local_csv`, `fifa`, or `api_football`
+- `FOOTBALL_API_KEY`: optional provider key
+- `VITE_DATA_REFRESH_INTERVAL_MINUTES`: frontend polling interval, default `15`
+- `USE_CURRENT_TOURNAMENT_RESULTS_AS_FORM`: future model hook, default intended `true`
+- `RETRAIN_WITH_CURRENT_TOURNAMENT_RESULTS`: future model hook, default intended `false`
+
+No paid API is required. If no API provider is configured, put manual imports in:
+
+- `data/imports/fixtures.csv`
+- `data/imports/results.csv`
+
+Refresh will fall back to those files, then to the bundled official group-stage
+schedule if no fixture CSV exists. It will not invent results.
+
+Prediction snapshots are required for honest accuracy reporting. For each
+completed match, evaluation uses the latest snapshot generated before kickoff.
+If no pre-kickoff snapshot exists, the match is shown as “not eligible for
+evaluation” and does not count in accuracy, log loss, Brier score, exact-score
+rate, over/under accuracy, or any other official performance metric.
+
 ## Notes
 
 Install `xgboost` for the requested XGBoost model. If it is not installed, training still runs with the fallback classifier and reports `sklearn_hist_gradient_boosting_fallback` as the model type.

@@ -1,0 +1,49 @@
+group,country,played,wins,draws,losses,goals_for,goals_against,goal_difference,points,rank,qualification_status
+A,Mexico,2,2,0,0,3,0,3,6,1,possible
+A,South Korea,2,1,0,1,2,2,0,3,2,possible
+A,Czechia,2,0,1,1,2,3,-1,1,3,possible
+A,South Africa,2,0,1,1,1,3,-2,1,4,possible
+B,Canada,2,1,1,0,7,1,6,4,1,possible
+B,Switzerland,2,1,1,0,5,2,3,4,2,possible
+B,Bosnia and Herzegovina,2,0,1,1,2,5,-3,1,3,possible
+B,Qatar,2,0,1,1,1,7,-6,1,4,possible
+C,Brazil,2,1,1,0,4,1,3,4,1,possible
+C,Morocco,2,1,1,0,2,1,1,4,2,possible
+C,Scotland,2,1,0,1,1,1,0,3,3,possible
+C,Haiti,2,0,0,2,0,4,-4,0,4,possible
+D,United States,2,2,0,0,6,1,5,6,1,possible
+D,Australia,2,1,0,1,2,2,0,3,2,possible
+D,Paraguay,2,1,0,1,2,4,-2,3,3,possible
+D,Türkiye,2,0,0,2,0,3,-3,0,4,possible
+E,Germany,2,2,0,0,9,2,7,6,1,possible
+E,Côte d'Ivoire,2,1,0,1,2,2,0,3,2,possible
+E,Ecuador,2,0,1,1,0,1,-1,1,3,possible
+E,Curaçao,2,0,1,1,1,7,-6,1,4,possible
+F,Netherlands,2,1,1,0,7,3,4,4,1,possible
+F,Japan,2,1,1,0,6,2,4,4,2,possible
+F,Sweden,2,1,0,1,6,6,0,3,3,possible
+F,Tunisia,2,0,0,2,1,9,-8,0,4,possible
+G,Egypt,2,1,1,0,4,2,2,4,1,possible
+G,IR Iran,2,0,2,0,2,2,0,2,2,possible
+G,Belgium,2,0,2,0,1,1,0,2,3,possible
+G,New Zealand,2,0,1,1,3,5,-2,1,4,possible
+H,Spain,2,1,1,0,4,0,4,4,1,possible
+H,Uruguay,2,0,2,0,3,3,0,2,2,possible
+H,Cabo Verde,2,0,2,0,2,2,0,2,3,possible
+H,Saudi Arabia,2,0,1,1,1,5,-4,1,4,possible
+I,France,2,2,0,0,6,1,5,6,1,possible
+I,Norway,2,2,0,0,7,3,4,6,2,possible
+I,Senegal,2,0,0,2,3,6,-3,0,3,possible
+I,Iraq,2,0,0,2,1,7,-6,0,4,possible
+J,Argentina,2,2,0,0,5,0,5,6,1,possible
+J,Austria,2,1,0,1,3,3,0,3,2,possible
+J,Algeria,2,1,0,1,2,4,-2,3,3,possible
+J,Jordan,2,0,0,2,2,5,-3,0,4,possible
+K,Colombia,2,2,0,0,4,1,3,6,1,possible
+K,Portugal,2,1,1,0,6,1,5,4,2,possible
+K,Congo DR,2,0,1,1,1,2,-1,1,3,possible
+K,Uzbekistan,2,0,0,2,1,8,-7,0,4,possible
+L,England,2,1,1,0,4,2,2,4,1,possible
+L,Ghana,2,1,1,0,1,0,1,4,2,possible
+L,Croatia,2,1,0,1,3,4,-1,3,3,possible
+L,Panama,2,0,0,2,0,2,-2,0,4,possible
