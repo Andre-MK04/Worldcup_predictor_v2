@@ -1,5 +1,5 @@
 export type FormResult = "W" | "D" | "L";
-export type AppView = "predictions" | "groups" | "team" | "model" | "backtesting" | "performance";
+export type AppView = "predictions" | "groups" | "team" | "model" | "backtesting" | "performance" | "trading";
 export type FixtureStatus = "scheduled" | "live" | "completed" | "postponed";
 export type PredictionOutcome = "home_win" | "draw" | "away_win";
 export type FixtureStage =
@@ -144,6 +144,7 @@ export interface FixturePredictionResult {
 export interface Prediction {
   id: string;
   matchId: string;
+  stage: FixtureStage;
   group: string;
   date: string;
   venue: string;
@@ -169,6 +170,15 @@ export interface Prediction {
   topScorelines: ScorelineProbability[];
   explanation: string;
   scorelineNote?: string;
+  knockout?: {
+    teamAAdvanceProbability: number;
+    teamBAdvanceProbability: number;
+    predictedToAdvanceCode: string;
+    predictedToAdvanceName: string;
+    advanceProbability: number;
+    advanceLabel: string;
+    note: string;
+  };
 }
 
 export interface ModelMetric {
@@ -293,4 +303,79 @@ export interface MatchEvaluation {
 export interface EvaluationPayload {
   summary: PerformanceSummary;
   matches: MatchEvaluation[];
+}
+
+export interface TradingConfig {
+  trading_mode: string;
+  enable_real_trading: boolean;
+  real_bankroll_limit_usd: number;
+  max_stake_per_trade_usd: number;
+  max_stake_per_match_usd: number;
+  max_daily_stake_usd: number;
+  max_total_open_exposure_usd: number;
+  min_edge: number;
+  min_model_probability: number;
+  max_entry_price: number;
+  min_market_liquidity_usd: number;
+  max_allowed_spread: number;
+  allow_draw_bets: boolean;
+  allow_live_bets: boolean;
+  allow_multiple_bets_per_match: boolean;
+  use_limit_orders_only: boolean;
+  auto_retry_orders: boolean;
+  kill_switch: boolean;
+  polymarket_api_base_url: string;
+  credentials_present: boolean;
+  safety_notice: string;
+}
+
+export interface TradeRecommendation {
+  trade_id: string;
+  created_at: string;
+  match_id: string;
+  team_a: string;
+  team_b: string;
+  outcome: string;
+  country_or_draw: string;
+  model_probability: string;
+  market_entry_price: string;
+  edge: string;
+  spread: string;
+  liquidity: string;
+  recommended_stake_usd: string;
+  stake_reason: string;
+  approved_by_risk: string;
+  risk_reason: string;
+  risk_checks: string;
+  status: string;
+}
+
+export interface RealTrade {
+  trade_id: string;
+  created_at: string;
+  match_id: string;
+  team_a: string;
+  team_b: string;
+  outcome: string;
+  country_or_draw: string;
+  side: string;
+  limit_price: string;
+  stake_usd: string;
+  shares_requested: string;
+  order_id: string;
+  order_status: string;
+  status: string;
+  error_message: string;
+  profit_loss: string;
+}
+
+export interface TradingPerformanceSummary {
+  as_of: string;
+  trade_count: number;
+  total_staked: number;
+  open_exposure: number;
+  settled_profit_loss: number;
+  roi: number | null;
+  wins: number;
+  losses: number;
 }

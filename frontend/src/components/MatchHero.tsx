@@ -8,6 +8,8 @@ interface MatchHeroProps {
 export function MatchHero({ prediction }: MatchHeroProps) {
   const displayScoreline = getDisplayScoreline(prediction);
   const scorelineNote = getScorelineNote(prediction);
+  const isKnockout = Boolean(prediction.knockout);
+  const isDrawScoreline = prediction.scoreOutcome === "draw";
   return (
     <section className="match-hero" id="predictions">
       <div className="match-meta">
@@ -18,11 +20,21 @@ export function MatchHero({ prediction }: MatchHeroProps) {
       <div className="hero-grid">
         <HeroTeam team={prediction.teamA} align="left" />
         <div className="score-panel">
-          <span className="prediction-label">Predicted result</span>
+          <span className="prediction-label">{isKnockout ? "Predicted to advance" : "Predicted result"}</span>
           <strong>{displayScoreline}</strong>
-          <p>{prediction.predictedOutcome}</p>
-          <span className="confidence-line">Outcome probability {percent(prediction.confidence)}</span>
-          {scorelineNote ? <small className="scoreline-note">{scorelineNote}</small> : null}
+          <p>{prediction.knockout?.advanceLabel ?? prediction.predictedOutcome}</p>
+          <span className="confidence-line">
+            {isKnockout
+              ? `Advance probability ${percent(prediction.knockout?.advanceProbability ?? prediction.confidence)}`
+              : `Outcome probability ${percent(prediction.confidence)}`}
+          </span>
+          {isKnockout && isDrawScoreline ? (
+            <small className="scoreline-note">
+              Most likely 90-minute scoreline: {displayScoreline}. Advancement prediction includes extra time/penalty likelihood.
+            </small>
+          ) : scorelineNote ? (
+            <small className="scoreline-note">{scorelineNote}</small>
+          ) : null}
         </div>
         <HeroTeam team={prediction.teamB} align="right" />
       </div>

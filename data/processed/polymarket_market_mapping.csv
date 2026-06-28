@@ -1,0 +1,1 @@
+match_id,team_a,team_b,kickoff_time,polymarket_market_id,polymarket_slug,condition_id,token_id_team_a_win,token_id_draw,token_id_team_b_win,outcome_label_team_a,outcome_label_draw,outcome_label_team_b,mapping_confidence,mapping_status,reviewed_by_user,last_checked_at

@@ -11,6 +11,15 @@ type GroupScheduleSeed = {
   positions: [string, string, string, string];
 };
 
+type RoundOf32Seed = {
+  id: string;
+  date: string;
+  teamA: string;
+  teamB: string;
+  venue: string;
+  city: string;
+};
+
 const groupScheduleSeeds: GroupScheduleSeed[] = [
   {
     group: "A",
@@ -74,10 +83,37 @@ const officialGroupPairings = [
   { pair: [1, 2], matchday: 2 },
 ] as const;
 
+export const teamAliases: Record<string, string[]> = {
+  "United States": ["USA", "United States of America", "USMNT"],
+  "Ivory Coast": ["CIV", "Côte d'Ivoire", "Cote d'Ivoire"],
+  "DR Congo": ["COD", "Democratic Republic of the Congo", "Congo DR"],
+  "Cabo Verde": ["CPV", "Cape Verde"],
+  "Bosnia and Herzegovina": ["BIH", "Bosnia & Herzegovina"],
+};
+
+export const roundOf32FixtureSeeds: RoundOf32Seed[] = [
+  { id: "M73", date: "2026-06-28", teamA: "South Africa", teamB: "Canada", venue: "Los Angeles Stadium", city: "Los Angeles" },
+  { id: "M76", date: "2026-06-29", teamA: "Brazil", teamB: "Japan", venue: "Houston Stadium", city: "Houston" },
+  { id: "M74", date: "2026-06-29", teamA: "Germany", teamB: "Paraguay", venue: "Boston Stadium", city: "Boston" },
+  { id: "M75", date: "2026-06-29", teamA: "Netherlands", teamB: "Morocco", venue: "Estadio Monterrey", city: "Monterrey" },
+  { id: "M78", date: "2026-06-30", teamA: "Ivory Coast", teamB: "Norway", venue: "Dallas Stadium", city: "Dallas" },
+  { id: "M77", date: "2026-06-30", teamA: "France", teamB: "Sweden", venue: "New York New Jersey Stadium", city: "New York/New Jersey" },
+  { id: "M79", date: "2026-06-30", teamA: "Mexico", teamB: "Ecuador", venue: "Mexico City Stadium", city: "Mexico City" },
+  { id: "M80", date: "2026-07-01", teamA: "England", teamB: "DR Congo", venue: "Atlanta Stadium", city: "Atlanta" },
+  { id: "M82", date: "2026-07-01", teamA: "Belgium", teamB: "Senegal", venue: "Seattle Stadium", city: "Seattle" },
+  { id: "M81", date: "2026-07-01", teamA: "United States", teamB: "Bosnia and Herzegovina", venue: "San Francisco Bay Area Stadium", city: "San Francisco Bay Area" },
+  { id: "M84", date: "2026-07-02", teamA: "Spain", teamB: "Austria", venue: "Los Angeles Stadium", city: "Los Angeles" },
+  { id: "M83", date: "2026-07-02", teamA: "Portugal", teamB: "Croatia", venue: "Toronto Stadium", city: "Toronto" },
+  { id: "M85", date: "2026-07-02", teamA: "Switzerland", teamB: "Algeria", venue: "BC Place Vancouver", city: "Vancouver" },
+  { id: "M88", date: "2026-07-03", teamA: "Australia", teamB: "Egypt", venue: "Dallas Stadium", city: "Dallas" },
+  { id: "M86", date: "2026-07-03", teamA: "Argentina", teamB: "Cabo Verde", venue: "Miami Stadium", city: "Miami" },
+  { id: "M87", date: "2026-07-03", teamA: "Colombia", teamB: "Ghana", venue: "Kansas City Stadium", city: "Kansas City" },
+];
+
 // Static official fixture source. The pairings use FIFA's group-position pattern:
 // MD1: 1v2 and 3v4, MD2: 1v3 and 4v2, MD3: 4v1 and 2v3.
 // Do not add generated or guessed teams here; unresolved knockout teams should be placeholders.
-export const worldCup2026Fixtures: WorldCupFixture[] = groupScheduleSeeds.flatMap((seed, groupIndex) =>
+export const groupFixtures: WorldCupFixture[] = groupScheduleSeeds.flatMap((seed, groupIndex) =>
   officialGroupPairings.map(({ pair, matchday }, pairingIndex) => {
     const homeCode = seed.positions[pair[0]];
     const awayCode = seed.positions[pair[1]];
@@ -112,4 +148,51 @@ export const worldCup2026Fixtures: WorldCupFixture[] = groupScheduleSeeds.flatMa
   }),
 );
 
+export const roundOf32Fixtures: WorldCupFixture[] = roundOf32FixtureSeeds.map((seed) => {
+  const homeTeam = findTeamByNameOrAlias(seed.teamA);
+  const awayTeam = findTeamByNameOrAlias(seed.teamB);
+  if (!homeTeam || !awayTeam) {
+    throw new Error(`Missing official team metadata for ${seed.teamA} vs ${seed.teamB}`);
+  }
+  return {
+    id: seed.id,
+    fifaMatchNumber: Number(seed.id.replace("M", "")),
+    stage: "round_of_32",
+    date: seed.date,
+    venue: seed.venue,
+    city: seed.city,
+    homeTeam: {
+      name: homeTeam.name,
+      code: homeTeam.code,
+      flag: homeTeam.flag,
+    },
+    awayTeam: {
+      name: awayTeam.name,
+      code: awayTeam.code,
+      flag: awayTeam.flag,
+    },
+    status: "scheduled",
+    source: "official_fifa",
+    sourceUrl: OFFICIAL_FIFA_FIXTURE_SOURCE_URL,
+    verified: true,
+  };
+});
+
+export const worldCup2026Fixtures: WorldCupFixture[] = [...groupFixtures, ...roundOf32Fixtures];
+
 export const officialTeamGroups = Object.fromEntries(worldCup2026Teams.map((team) => [team.code, team.group]));
+
+function findTeamByNameOrAlias(name: string) {
+  const aliases = [name, ...(teamAliases[name] ?? [])];
+  for (const alias of aliases) {
+    const byCode = worldCup2026TeamsByCode[alias];
+    if (byCode) return byCode;
+    const byName = worldCup2026Teams.find((team) => normalizeName(team.name) === normalizeName(alias));
+    if (byName) return byName;
+  }
+  return undefined;
+}
+
+function normalizeName(value: string) {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}

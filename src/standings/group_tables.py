@@ -25,6 +25,8 @@ def calculate_group_standings(results: list[dict[str, str]], fixtures: list[dict
     teams_by_group: dict[str, set[str]] = defaultdict(set)
     for fixture in fixtures:
         group = fixture.get("group", "")
+        if fixture.get("stage") != "group" or not group:
+            continue
         if fixture.get("team_a"):
             teams_by_group[group].add(fixture["team_a"])
         if fixture.get("team_b"):
@@ -51,7 +53,11 @@ def calculate_group_standings(results: list[dict[str, str]], fixtures: list[dict
     for result in results:
         if normalize_status(result.get("status", "")) != "complete":
             continue
+        if result.get("stage") != "group":
+            continue
         group = result.get("group", "")
+        if not group:
+            continue
         team_a = result.get("team_a", "")
         team_b = result.get("team_b", "")
         if not team_a or not team_b:

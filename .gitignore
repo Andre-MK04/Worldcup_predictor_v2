@@ -2,6 +2,12 @@ __pycache__/
 *.py[cod]
 .venv/
 .venv_x86/
+.env
+.env.local
+.env.production
+*.key
+secrets/
+wallet.json
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -14,3 +20,7 @@ models/*.joblib
 outputs/*
 
 !.gitkeep
+!data/imports/results.csv
+!data/imports/results_sources.md
+!data/imports/.gitkeep
+!data/processed/*.csv

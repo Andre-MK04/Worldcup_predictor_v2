@@ -1,0 +1,1 @@
+trade_id,created_at,match_id,team_a,team_b,market_id,condition_id,token_id,outcome,country_or_draw,side,limit_price,stake_usd,shares_requested,order_id,order_status,filled_shares,average_fill_price,status,error_message,settled_at,actual_result,payout,profit_loss,roi

@@ -71,3 +71,19 @@ GHA-ENG-2026-06-23,2026-06-23,12:00,L,group,Ghana,England,GHA,ENG,,scheduled,tru
 CRO-PAN-2026-06-23,2026-06-23,12:00,L,group,Croatia,Panama,CRO,PAN,,scheduled,true,70
 CRO-GHA-2026-06-27,2026-06-27,12:00,L,group,Croatia,Ghana,CRO,GHA,,scheduled,true,71
 PAN-ENG-2026-06-27,2026-06-27,12:00,L,group,Panama,England,PAN,ENG,,scheduled,true,72
+M73,2026-06-28,12:00,,round_of_32,South Africa,Canada,RSA,CAN,Los Angeles Stadium,scheduled,true,73
+M76,2026-06-29,12:00,,round_of_32,Brazil,Japan,BRA,JPN,Houston Stadium,scheduled,true,76
+M74,2026-06-29,12:00,,round_of_32,Germany,Paraguay,GER,PAR,Boston Stadium,scheduled,true,74
+M75,2026-06-29,12:00,,round_of_32,Netherlands,Morocco,NED,MAR,Estadio Monterrey,scheduled,true,75
+M78,2026-06-30,12:00,,round_of_32,Côte d'Ivoire,Norway,CIV,NOR,Dallas Stadium,scheduled,true,78
+M77,2026-06-30,12:00,,round_of_32,France,Sweden,FRA,SWE,New York New Jersey Stadium,scheduled,true,77
+M79,2026-06-30,12:00,,round_of_32,Mexico,Ecuador,MEX,ECU,Mexico City Stadium,scheduled,true,79
+M80,2026-07-01,12:00,,round_of_32,England,Congo DR,ENG,COD,Atlanta Stadium,scheduled,true,80
+M82,2026-07-01,12:00,,round_of_32,Belgium,Senegal,BEL,SEN,Seattle Stadium,scheduled,true,82
+M81,2026-07-01,12:00,,round_of_32,United States,Bosnia and Herzegovina,USA,BIH,San Francisco Bay Area Stadium,scheduled,true,81
+M84,2026-07-02,12:00,,round_of_32,Spain,Austria,ESP,AUT,Los Angeles Stadium,scheduled,true,84
+M83,2026-07-02,12:00,,round_of_32,Portugal,Croatia,POR,CRO,Toronto Stadium,scheduled,true,83
+M85,2026-07-02,12:00,,round_of_32,Switzerland,Algeria,SUI,ALG,BC Place Vancouver,scheduled,true,85
+M88,2026-07-03,12:00,,round_of_32,Australia,Egypt,AUS,EGY,Dallas Stadium,scheduled,true,88
+M86,2026-07-03,12:00,,round_of_32,Argentina,Cabo Verde,ARG,CPV,Miami Stadium,scheduled,true,86
+M87,2026-07-03,12:00,,round_of_32,Colombia,Ghana,COL,GHA,Kansas City Stadium,scheduled,true,87

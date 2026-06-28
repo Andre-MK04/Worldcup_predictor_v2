@@ -8,6 +8,7 @@ import { MatchSelector } from "./components/MatchSelector";
 import { ModelMetrics } from "./components/ModelMetrics";
 import { ModelView } from "./components/ModelView";
 import { Performance } from "./pages/Performance";
+import { Trading } from "./pages/Trading";
 import { PredictionExplanation } from "./components/PredictionExplanation";
 import { ProbabilityBar } from "./components/ProbabilityBar";
 import { ScorelineList } from "./components/ScorelineList";
@@ -137,6 +138,7 @@ export default function App() {
       {activeView === "performance" ? (
         <Performance apiAvailable={apiAvailable} evaluation={evaluation} predictions={predictions} />
       ) : null}
+      {activeView === "trading" ? <Trading apiAvailable={apiAvailable} /> : null}
     </div>
   );
 }

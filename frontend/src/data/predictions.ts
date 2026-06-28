@@ -34,11 +34,21 @@ function generatePredictionForFixture(fixture: WorldCupFixture): Prediction {
 
   const modelPrediction = predictFixture(fixture, homeTeam, awayTeam);
   const recommendedScore = `${modelPrediction.predictedScore.home}–${modelPrediction.predictedScore.away}`;
+  const knockout = fixture.stage === "round_of_32"
+    ? calculateAdvanceProbabilities(
+        modelPrediction.probabilities,
+        homeTeam.eloRating,
+        awayTeam.eloRating,
+        homeTeam,
+        awayTeam,
+      )
+    : undefined;
 
   return {
     id: fixture.id,
     matchId: fixture.id,
-    group: fixture.group ? `Group ${fixture.group}` : fixture.stage,
+    stage: fixture.stage,
+    group: fixture.group ? `Group ${fixture.group}` : stageLabel(fixture.stage),
     date: fixture.date,
     venue: fixture.venue ?? "Venue TBC",
     teamA: toPredictionTeam(homeTeam, modelPrediction.expectedGoals.home),
@@ -70,7 +80,45 @@ function generatePredictionForFixture(fixture: WorldCupFixture): Prediction {
       probability: scoreline.probability,
     })),
     explanation: modelPrediction.explanation,
+    knockout,
   };
+}
+
+function calculateAdvanceProbabilities(
+  probabilities: { homeWin: number; draw: number; awayWin: number },
+  teamAStrength: number,
+  teamBStrength: number,
+  teamA: Team,
+  teamB: Team,
+) {
+  const safeTeamAStrength = Math.max(0, teamAStrength);
+  const safeTeamBStrength = Math.max(0, teamBStrength);
+  const totalStrength = safeTeamAStrength + safeTeamBStrength;
+  const teamADrawShare = totalStrength > 0 ? safeTeamAStrength / totalStrength : 0.5;
+  const teamAAdvanceProbability = probabilities.homeWin + probabilities.draw * teamADrawShare;
+  const teamBAdvanceProbability = probabilities.awayWin + probabilities.draw * (1 - teamADrawShare);
+  const predictedToAdvance = teamAAdvanceProbability >= teamBAdvanceProbability ? teamA : teamB;
+  const advanceProbability = Math.max(teamAAdvanceProbability, teamBAdvanceProbability);
+
+  return {
+    teamAAdvanceProbability,
+    teamBAdvanceProbability,
+    predictedToAdvanceCode: predictedToAdvance.code,
+    predictedToAdvanceName: predictedToAdvance.name,
+    advanceProbability,
+    advanceLabel: `${predictedToAdvance.name} to advance`,
+    note: "Advancement probability allocates the 90-minute draw chance by team Elo strength.",
+  };
+}
+
+function stageLabel(stage: WorldCupFixture["stage"]) {
+  if (stage === "round_of_32") return "Round of 32";
+  if (stage === "round_of_16") return "Round of 16";
+  if (stage === "quarter_final") return "Quarter-final";
+  if (stage === "semi_final") return "Semi-final";
+  if (stage === "third_place") return "Third place";
+  if (stage === "final") return "Final";
+  return "Group Stage";
 }
 
 function probabilityForOutcome(

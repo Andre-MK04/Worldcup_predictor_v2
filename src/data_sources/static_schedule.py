@@ -76,6 +76,25 @@ OFFICIAL_GROUP_PAIRINGS = [
     ((1, 2), 2),
 ]
 
+ROUND_OF_32_FIXTURES = [
+    ("M73", "2026-06-28", "RSA", "CAN", "Los Angeles Stadium"),
+    ("M76", "2026-06-29", "BRA", "JPN", "Houston Stadium"),
+    ("M74", "2026-06-29", "GER", "PAR", "Boston Stadium"),
+    ("M75", "2026-06-29", "NED", "MAR", "Estadio Monterrey"),
+    ("M78", "2026-06-30", "CIV", "NOR", "Dallas Stadium"),
+    ("M77", "2026-06-30", "FRA", "SWE", "New York New Jersey Stadium"),
+    ("M79", "2026-06-30", "MEX", "ECU", "Mexico City Stadium"),
+    ("M80", "2026-07-01", "ENG", "COD", "Atlanta Stadium"),
+    ("M82", "2026-07-01", "BEL", "SEN", "Seattle Stadium"),
+    ("M81", "2026-07-01", "USA", "BIH", "San Francisco Bay Area Stadium"),
+    ("M84", "2026-07-02", "ESP", "AUT", "Los Angeles Stadium"),
+    ("M83", "2026-07-02", "POR", "CRO", "Toronto Stadium"),
+    ("M85", "2026-07-02", "SUI", "ALG", "BC Place Vancouver"),
+    ("M88", "2026-07-03", "AUS", "EGY", "Dallas Stadium"),
+    ("M86", "2026-07-03", "ARG", "CPV", "Miami Stadium"),
+    ("M87", "2026-07-03", "COL", "GHA", "Kansas City Stadium"),
+]
+
 
 def build_static_group_fixtures() -> list[dict[str, str]]:
     fixtures: list[dict[str, str]] = []
@@ -100,4 +119,22 @@ def build_static_group_fixtures() -> list[dict[str, str]]:
                     "fifa_match_number": str(group_index * 6 + pairing_index + 1),
                 }
             )
+    for match_id, date, team_a, team_b, venue in ROUND_OF_32_FIXTURES:
+        fixtures.append(
+            {
+                "match_id": match_id,
+                "date": date,
+                "kickoff_time": "12:00",
+                "group": "",
+                "stage": "round_of_32",
+                "team_a": TEAM_NAMES[team_a],
+                "team_b": TEAM_NAMES[team_b],
+                "team_a_code": team_a,
+                "team_b_code": team_b,
+                "venue": venue,
+                "status": "scheduled",
+                "is_neutral_venue": "true",
+                "fifa_match_number": match_id.removeprefix("M"),
+            }
+        )
     return fixtures

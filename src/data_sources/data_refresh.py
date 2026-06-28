@@ -153,7 +153,11 @@ def refresh_fixtures(warnings: list[str] | None = None) -> list[dict[str, str]]:
     fixtures = normalize_fixtures(payload.fixtures)
     if not fixtures:
         fixtures = build_static_group_fixtures()
-        warnings.append("Using bundled official group fixture schedule because no provider fixture CSV was available.")
+        warnings.append("Using bundled official fixture schedule because no provider fixture CSV was available.")
+    else:
+        added = merge_static_fixtures(fixtures)
+        if added:
+            warnings.append(f"Added {added} bundled official fixture(s) missing from the provider fixture CSV.")
     write_csv(PROCESSED_DIR / "fixtures.csv", FIXTURE_FIELDS, fixtures)
     return fixtures
 
@@ -430,6 +434,18 @@ def normalize_fixtures(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         fixture["status"] = normalize_status(fixture["status"] or "scheduled")
         fixtures.append(fixture)
     return fixtures
+
+
+def merge_static_fixtures(fixtures: list[dict[str, str]]) -> int:
+    existing_ids = {fixture.get("match_id", "") for fixture in fixtures}
+    added = 0
+    for fixture in build_static_group_fixtures():
+        match_id = fixture.get("match_id", "")
+        if match_id and match_id not in existing_ids:
+            fixtures.append(fixture)
+            existing_ids.add(match_id)
+            added += 1
+    return added
 
 
 def normalize_results(rows: list[dict[str, str]]) -> list[dict[str, str]]:

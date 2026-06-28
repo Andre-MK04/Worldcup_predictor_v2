@@ -1,0 +1,1 @@
+trade_id,created_at,match_id,team_a,team_b,market_id,condition_id,token_id,outcome,country_or_draw,model_probability,market_entry_price,edge,expected_value,spread,liquidity,recommended_stake_usd,stake_reason,approved_by_risk,risk_reason,risk_checks,status

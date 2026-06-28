@@ -155,6 +155,35 @@ If no pre-kickoff snapshot exists, the match is shown as “not eligible for
 evaluation” and does not count in accuracy, log loss, Brier score, exact-score
 rate, over/under accuracy, or any other official performance metric.
 
+## Real-Money Trading Safety
+
+The app includes a locked-down Polymarket trading scaffold for World Cup 1X2
+match markets only. It is not financial advice, and prediction markets can lose
+the full amount staked.
+
+Defaults are intentionally blocking:
+
+- `ENABLE_REAL_TRADING=false`
+- `KILL_SWITCH=true`
+- `REAL_BANKROLL_LIMIT_USD=10.00`
+- `MAX_STAKE_PER_TRADE_USD=0.50`
+- `MAX_STAKE_PER_MATCH_USD=1.00`
+- `MAX_DAILY_STAKE_USD=3.00`
+- `MAX_TOTAL_OPEN_EXPOSURE_USD=5.00`
+- `USE_LIMIT_ORDERS_ONLY=true`
+- `AUTO_RETRY_ORDERS=false`
+
+Authenticated Polymarket secrets must exist only on the backend. Use
+`.env.example` as a template and never commit real values. Market mappings must
+be manually reviewed and approved in `data/processed/polymarket_market_mapping.csv`
+before any trade can even be considered.
+
+The Trading page can display safety config, recommendations, the ledger and
+performance. The execution endpoint requires an explicit `CONFIRM` text and runs
+risk checks again immediately before execution. In the current safety-first
+build, SDK order submission is not enabled; a risk-approved request is recorded
+instead of sending a real order.
+
 ## Notes
 
 Install `xgboost` for the requested XGBoost model. If it is not installed, training still runs with the fallback classifier and reports `sklearn_hist_gradient_boosting_fallback` as the model type.

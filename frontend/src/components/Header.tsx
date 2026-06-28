@@ -17,6 +17,7 @@ const navItems: Array<{ label: string; view: AppView }> = [
   { label: "Predictions", view: "predictions" },
   { label: "Groups", view: "groups" },
   { label: "Performance", view: "performance" },
+  { label: "Trading", view: "trading" },
   { label: "Model", view: "model" },
   { label: "Backtesting", view: "backtesting" },
 ];
