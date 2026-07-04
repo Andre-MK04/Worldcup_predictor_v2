@@ -26,7 +26,7 @@ export function ProbabilityBar({ prediction }: ProbabilityBarProps) {
         <span>Three-way probability</span>
         <strong>Most likely overall outcome: {prediction.overallOutcomeLabel}</strong>
       </div>
-      {prediction.knockout ? <span className="knockout-badge">Round of 32 · Knockout</span> : null}
+      {prediction.knockout ? <span className="knockout-badge">{prediction.group} · Knockout</span> : null}
       <div className="segmented-bar" aria-label="Three-way match probability">
         {segments.map((segment) => (
           <span
@@ -64,6 +64,9 @@ export function ProbabilityBar({ prediction }: ProbabilityBarProps) {
         </p>
       ) : null}
       {prediction.knockout ? <p className="probability-note">{prediction.knockout.note}</p> : null}
+      {prediction.knockout?.nextMatchId ? (
+        <p className="probability-note">Next: Quarter-final {prediction.knockout.nextMatchId}</p>
+      ) : null}
     </section>
   );
 }

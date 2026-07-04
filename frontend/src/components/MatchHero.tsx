@@ -35,6 +35,9 @@ export function MatchHero({ prediction }: MatchHeroProps) {
           ) : scorelineNote ? (
             <small className="scoreline-note">{scorelineNote}</small>
           ) : null}
+          {prediction.knockout?.nextMatchId ? (
+            <small className="scoreline-note">Next: Quarter-final {prediction.knockout.nextMatchId}</small>
+          ) : null}
         </div>
         <HeroTeam team={prediction.teamB} align="right" />
       </div>

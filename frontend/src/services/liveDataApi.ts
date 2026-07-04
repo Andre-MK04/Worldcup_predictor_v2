@@ -27,6 +27,10 @@ export async function fetchEvaluation() {
   return fetchJson<EvaluationPayload>("/api/evaluation");
 }
 
+export async function recalculatePerformance() {
+  return fetchJson<EvaluationPayload>("/api/performance/recalculate", { method: "POST" });
+}
+
 export async function fetchStandings() {
   return fetchJson<LiveGroupStanding[]>("/api/standings");
 }

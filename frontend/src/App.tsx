@@ -16,7 +16,14 @@ import { TeamFormComparison } from "./components/TeamFormComparison";
 import { calibrationBuckets, fixtures, modelMetrics, predictions } from "./data/predictions";
 import { worldCup2026Teams } from "./data/worldCup2026Teams";
 import { fixtureValidation } from "./services/fixturesService";
-import { fetchEvaluation, fetchRefreshStatus, fetchStandings, hasApiBaseUrl, refreshWorldCupData } from "./services/liveDataApi";
+import {
+  fetchEvaluation,
+  fetchRefreshStatus,
+  fetchStandings,
+  hasApiBaseUrl,
+  recalculatePerformance,
+  refreshWorldCupData,
+} from "./services/liveDataApi";
 import type { AppView, EvaluationPayload, LiveGroupStanding, RefreshStatus } from "./types";
 
 export default function App() {
@@ -73,6 +80,19 @@ export default function App() {
     } catch (error) {
       console.error("Failed to refresh World Cup data", error);
       setApiConnected(false);
+      setRefreshState("error");
+    }
+  }, [apiAvailable]);
+
+  const handlePerformanceRecalculate = useCallback(async () => {
+    if (!apiAvailable) return;
+    setRefreshState("loading");
+    try {
+      const payload = await recalculatePerformance();
+      if (payload) setEvaluation(payload);
+      setRefreshState("success");
+    } catch (error) {
+      console.error("Failed to recalculate performance", error);
       setRefreshState("error");
     }
   }, [apiAvailable]);
@@ -136,7 +156,13 @@ export default function App() {
         <ModelView calibration={calibrationBuckets} metrics={modelMetrics} mode={activeView} />
       ) : null}
       {activeView === "performance" ? (
-        <Performance apiAvailable={apiAvailable} evaluation={evaluation} predictions={predictions} />
+        <Performance
+          apiAvailable={apiAvailable}
+          evaluation={evaluation}
+          onRecalculate={handlePerformanceRecalculate}
+          predictions={predictions}
+          recalculating={refreshState === "loading"}
+        />
       ) : null}
       {activeView === "trading" ? <Trading apiAvailable={apiAvailable} /> : null}
     </div>

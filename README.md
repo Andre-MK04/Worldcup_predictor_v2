@@ -155,6 +155,41 @@ If no pre-kickoff snapshot exists, the match is shown as “not eligible for
 evaluation” and does not count in accuracy, log loss, Brier score, exact-score
 rate, over/under accuracy, or any other official performance metric.
 
+## Model Performance Tracking
+
+The Performance page reports only snapshot-based results. A completed match is
+eligible when `prediction_snapshots.csv` contains a prediction generated before
+that match's kickoff. Regenerating a prediction after the match is complete does
+not make the match eligible and must not be used to improve historical stats.
+
+Result accuracy is calculated from `result_label`, not just country names:
+
+- `team_a_win`
+- `draw`
+- `team_b_win`
+
+This keeps draw evaluation honest because draws do not have a winning country.
+The result accuracy denominator is only eligible completed matches.
+
+Exact scoreline accuracy compares the predicted `most_likely_single_scoreline`
+against the actual score from Team A's perspective. Scoreline strings are
+normalized so values like `1–0` and `1-0` compare correctly. Exact scoreline
+prediction is much harder than result prediction because the model has to get
+both teams' goal totals exactly right, not just the match outcome.
+
+Top 5 scoreline hit rate checks whether the actual score appears anywhere in
+the stored `top_5_scorelines` snapshot. This gives a broader view of whether the
+goal model had the real result in its plausible scoreline set.
+
+Matches without a valid pre-kickoff snapshot are excluded from official
+performance metrics and shown separately as not eligible for evaluation. Future,
+live, postponed, cancelled, and scoreless/missing-result matches are not counted
+until they are complete and have an eligible snapshot.
+
+For knockout matches, the current evaluation tracks normal match result and
+scoreline. Advancing-team accuracy is intentionally separate and should be added
+later when knockout result data includes extra-time/penalty advancement fields.
+
 ## Real-Money Trading Safety
 
 The app includes a locked-down Polymarket trading scaffold for World Cup 1X2

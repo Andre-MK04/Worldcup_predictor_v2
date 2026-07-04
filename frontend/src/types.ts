@@ -75,6 +75,7 @@ export interface WorldCupFixture {
   venue?: string;
   city?: string;
   country?: string;
+  nextMatchId?: string;
   homeTeam: FixtureTeam;
   awayTeam: FixtureTeam;
   status: FixtureStatus;
@@ -178,6 +179,7 @@ export interface Prediction {
     advanceProbability: number;
     advanceLabel: string;
     note: string;
+    nextMatchId?: string;
   };
 }
 
@@ -259,17 +261,37 @@ export interface PerformanceSummary {
     matches: number;
     accuracy: number | null;
   }>;
+  prediction_type_breakdown?: Array<{
+    type: string;
+    label: string;
+    matches: number;
+    correct: number;
+    accuracy: number | null;
+  }>;
+  accuracy_by_group?: Array<{
+    group: string;
+    matches: number;
+    correct: number;
+    accuracy: number | null;
+  }>;
+  draw_predictions_correct?: number;
+  winner_predictions_correct?: number;
+  last_updated?: string;
   message?: string;
 }
 
 export interface MatchEvaluation {
   match_id: string;
   date: string;
+  group: string;
+  stage: string;
   team_a: string;
   team_b: string;
   eligible_for_evaluation: string;
+  evaluation_status: string;
   ineligibility_reason: string;
   actual_score: string;
+  actual_scoreline: string;
   actual_result_label: string;
   predicted_result_label: string;
   predicted_winner_country: string;
@@ -288,6 +310,7 @@ export interface MatchEvaluation {
   total_goals_error: string;
   most_likely_single_scoreline: string;
   exact_scoreline_correct: string;
+  top_5_scorelines: string;
   actual_score_in_top_3: string;
   actual_score_in_top_5: string;
   predicted_over_2_5: string;

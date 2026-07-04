@@ -74,11 +74,15 @@ SNAPSHOT_FIELDS = ["snapshot_id", *PREDICTION_FIELDS[:2], "prediction_locked", *
 MATCH_EVALUATION_FIELDS = [
     "match_id",
     "date",
+    "group",
+    "stage",
     "team_a",
     "team_b",
     "eligible_for_evaluation",
+    "evaluation_status",
     "ineligibility_reason",
     "actual_score",
+    "actual_scoreline",
     "actual_result_label",
     "predicted_result_label",
     "predicted_winner_country",
@@ -97,6 +101,7 @@ MATCH_EVALUATION_FIELDS = [
     "total_goals_error",
     "most_likely_single_scoreline",
     "exact_scoreline_correct",
+    "top_5_scorelines",
     "actual_score_in_top_3",
     "actual_score_in_top_5",
     "predicted_over_2_5",
@@ -288,6 +293,7 @@ def update_evaluation_metrics(
     write_csv(OUTPUTS_DIR / "match_evaluation.csv", MATCH_EVALUATION_FIELDS, rows)
     summary = summarize_evaluation(eligible_rows, len(rows) - len(eligible_rows))
     write_json(OUTPUTS_DIR / "model_performance_summary.json", summary)
+    write_json(OUTPUTS_DIR / "performance_summary.json", summary)
     return summary
 
 
@@ -317,9 +323,12 @@ def evaluate_match(result: dict[str, str], fixture: dict[str, str], snapshot: di
     base = {
         "match_id": result.get("match_id", ""),
         "date": result.get("date", fixture.get("date", "")),
+        "group": result.get("group", fixture.get("group", "")),
+        "stage": result.get("stage", fixture.get("stage", "")),
         "team_a": result.get("team_a", fixture.get("team_a", "")),
         "team_b": result.get("team_b", fixture.get("team_b", "")),
         "actual_score": actual_score,
+        "actual_scoreline": actual_score,
         "actual_result_label": actual_result,
         "actual_goals_team_a": str(goals_a),
         "actual_goals_team_b": str(goals_b),
@@ -332,18 +341,22 @@ def evaluate_match(result: dict[str, str], fixture: dict[str, str], snapshot: di
             **empty_evaluation_row(),
             **base,
             "eligible_for_evaluation": "false",
+            "evaluation_status": "not_eligible_for_evaluation",
             "ineligibility_reason": "not eligible for evaluation: no pre-kickoff prediction snapshot",
         }
 
     expected_a = float(snapshot.get("expected_goals_team_a") or 0)
     expected_b = float(snapshot.get("expected_goals_team_b") or 0)
-    top_scores = parse_top_scorelines(snapshot.get("top_5_scorelines", ""))
+    raw_top_scorelines = snapshot.get("top_5_scorelines", "")
+    top_scores = parse_top_scorelines(raw_top_scorelines)
     predicted_score = normalize_score(snapshot.get("most_likely_single_scoreline", ""))
+    actual_score = normalize_score(actual_score)
     predicted_over = float(snapshot.get("p_over_2_5_goals") or 0) >= 0.5
     predicted_btts = float(snapshot.get("p_both_teams_to_score") or 0) >= 0.5
     return {
         **base,
         "eligible_for_evaluation": "true",
+        "evaluation_status": "evaluated",
         "ineligibility_reason": "",
         "predicted_result_label": snapshot.get("predicted_result_label", ""),
         "predicted_winner_country": snapshot.get("predicted_winner_country", ""),
@@ -359,6 +372,7 @@ def evaluate_match(result: dict[str, str], fixture: dict[str, str], snapshot: di
         "total_goals_error": f"{abs((expected_a + expected_b) - (goals_a + goals_b)):.3f}",
         "most_likely_single_scoreline": predicted_score,
         "exact_scoreline_correct": str(predicted_score == actual_score).lower(),
+        "top_5_scorelines": normalize_top_scorelines_for_output(raw_top_scorelines, top_scores),
         "actual_score_in_top_3": str(actual_score in top_scores[:3]).lower(),
         "actual_score_in_top_5": str(actual_score in top_scores[:5]).lower(),
         "predicted_over_2_5": str(predicted_over).lower(),
@@ -392,6 +406,11 @@ def summarize_evaluation(rows: list[dict[str, str]], not_eligible_matches: int) 
             "log_loss": None,
             "brier_score": None,
             "confidence_buckets": [],
+            "prediction_type_breakdown": [],
+            "accuracy_by_group": [],
+            "draw_predictions_correct": 0,
+            "winner_predictions_correct": 0,
+            "last_updated": now_iso(),
             "message": "No completed match has a pre-kickoff prediction snapshot yet.",
         }
 
@@ -403,6 +422,7 @@ def summarize_evaluation(rows: list[dict[str, str]], not_eligible_matches: int) 
     draw_predictions = [row for row in rows if row.get("predicted_result_label") == "draw"]
     actual_draws = [row for row in rows if row.get("actual_result_label") == "draw"]
     true_draws = [row for row in rows if row.get("predicted_result_label") == "draw" and row.get("actual_result_label") == "draw"]
+    true_winners = [row for row in rows if row.get("predicted_result_label") != "draw" and row.get("prediction_correct") == "true"]
 
     return {
         "evaluated_matches": evaluated,
@@ -423,6 +443,11 @@ def summarize_evaluation(rows: list[dict[str, str]], not_eligible_matches: int) 
         "log_loss": calculate_log_loss(rows),
         "brier_score": calculate_brier_score(rows),
         "confidence_buckets": confidence_buckets(rows),
+        "prediction_type_breakdown": prediction_type_breakdown(rows),
+        "accuracy_by_group": accuracy_by_group(rows),
+        "draw_predictions_correct": len(true_draws),
+        "winner_predictions_correct": len(true_winners),
+        "last_updated": now_iso(),
     }
 
 
@@ -566,6 +591,56 @@ def parse_top_scorelines(value: str) -> list[str]:
     except json.JSONDecodeError:
         pass
     return [normalize_score(item) for item in value.split("|") if item]
+
+
+def normalize_top_scorelines_for_output(raw_value: str, parsed_scores: list[str]) -> str:
+    if raw_value:
+        try:
+            parsed = json.loads(raw_value)
+            if isinstance(parsed, list):
+                return json.dumps(parsed)
+        except json.JSONDecodeError:
+            pass
+    return json.dumps(parsed_scores)
+
+
+def prediction_type_breakdown(rows: list[dict[str, str]]) -> list[dict[str, object]]:
+    output = []
+    labels = [
+        ("team_a_win", "Team A win"),
+        ("draw", "Draw"),
+        ("team_b_win", "Team B win"),
+    ]
+    for value, label in labels:
+        bucket = [row for row in rows if row.get("predicted_result_label") == value]
+        correct = count_true(bucket, "prediction_correct")
+        output.append(
+            {
+                "type": value,
+                "label": label,
+                "matches": len(bucket),
+                "correct": correct,
+                "accuracy": correct / len(bucket) if bucket else None,
+            }
+        )
+    return output
+
+
+def accuracy_by_group(rows: list[dict[str, str]]) -> list[dict[str, object]]:
+    groups = sorted({row.get("group", "") for row in rows if row.get("group", "")})
+    output = []
+    for group in groups:
+        bucket = [row for row in rows if row.get("group") == group]
+        correct = count_true(bucket, "prediction_correct")
+        output.append(
+            {
+                "group": group,
+                "matches": len(bucket),
+                "correct": correct,
+                "accuracy": correct / len(bucket) if bucket else None,
+            }
+        )
+    return output
 
 
 def empty_evaluation_row() -> dict[str, str]:

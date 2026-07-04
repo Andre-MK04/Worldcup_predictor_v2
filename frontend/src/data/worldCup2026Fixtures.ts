@@ -11,13 +11,16 @@ type GroupScheduleSeed = {
   positions: [string, string, string, string];
 };
 
-type RoundOf32Seed = {
+type KnockoutFixtureSeed = {
   id: string;
   date: string;
+  kickoffUTC?: string;
   teamA: string;
   teamB: string;
   venue: string;
   city: string;
+  country?: string;
+  nextMatchId?: string;
 };
 
 const groupScheduleSeeds: GroupScheduleSeed[] = [
@@ -89,9 +92,19 @@ export const teamAliases: Record<string, string[]> = {
   "DR Congo": ["COD", "Democratic Republic of the Congo", "Congo DR"],
   "Cabo Verde": ["CPV", "Cape Verde"],
   "Bosnia and Herzegovina": ["BIH", "Bosnia & Herzegovina"],
+  Morocco: ["Marocco"],
+  Brazil: ["Brasil"],
+  Norway: ["Norge"],
+  Mexico: ["México"],
+  England: ["England National Team"],
+  Portugal: ["Portuguese Republic"],
+  Spain: ["España"],
+  Switzerland: ["Swiss", "Suisse", "Schweiz"],
+  Colombia: ["Columbia"],
+  Egypt: ["Egypt National Team"],
 };
 
-export const roundOf32FixtureSeeds: RoundOf32Seed[] = [
+export const roundOf32FixtureSeeds: KnockoutFixtureSeed[] = [
   { id: "M73", date: "2026-06-28", teamA: "South Africa", teamB: "Canada", venue: "Los Angeles Stadium", city: "Los Angeles" },
   { id: "M76", date: "2026-06-29", teamA: "Brazil", teamB: "Japan", venue: "Houston Stadium", city: "Houston" },
   { id: "M74", date: "2026-06-29", teamA: "Germany", teamB: "Paraguay", venue: "Boston Stadium", city: "Boston" },
@@ -109,6 +122,104 @@ export const roundOf32FixtureSeeds: RoundOf32Seed[] = [
   { id: "M86", date: "2026-07-03", teamA: "Argentina", teamB: "Cabo Verde", venue: "Miami Stadium", city: "Miami" },
   { id: "M87", date: "2026-07-03", teamA: "Colombia", teamB: "Ghana", venue: "Kansas City Stadium", city: "Kansas City" },
 ];
+
+export const roundOf16FixtureSeeds: KnockoutFixtureSeed[] = [
+  {
+    id: "M90",
+    date: "2026-07-04",
+    kickoffUTC: "2026-07-04T17:00:00Z",
+    teamA: "Canada",
+    teamB: "Morocco",
+    venue: "Houston Stadium",
+    city: "Houston",
+    country: "United States",
+    nextMatchId: "M97",
+  },
+  {
+    id: "M89",
+    date: "2026-07-04",
+    kickoffUTC: "2026-07-04T21:00:00Z",
+    teamA: "Paraguay",
+    teamB: "France",
+    venue: "Philadelphia Stadium",
+    city: "Philadelphia",
+    country: "United States",
+    nextMatchId: "M97",
+  },
+  {
+    id: "M91",
+    date: "2026-07-05",
+    kickoffUTC: "2026-07-05T20:00:00Z",
+    teamA: "Brazil",
+    teamB: "Norway",
+    venue: "New York New Jersey Stadium",
+    city: "New York/New Jersey",
+    country: "United States",
+    nextMatchId: "M99",
+  },
+  {
+    id: "M92",
+    date: "2026-07-06",
+    kickoffUTC: "2026-07-06T00:00:00Z",
+    teamA: "Mexico",
+    teamB: "England",
+    venue: "Mexico City Stadium",
+    city: "Mexico City",
+    country: "Mexico",
+    nextMatchId: "M99",
+  },
+  {
+    id: "M93",
+    date: "2026-07-06",
+    kickoffUTC: "2026-07-06T19:00:00Z",
+    teamA: "Portugal",
+    teamB: "Spain",
+    venue: "Dallas Stadium",
+    city: "Dallas",
+    country: "United States",
+    nextMatchId: "M98",
+  },
+  {
+    id: "M94",
+    date: "2026-07-07",
+    kickoffUTC: "2026-07-07T00:00:00Z",
+    teamA: "United States",
+    teamB: "Belgium",
+    venue: "Seattle Stadium",
+    city: "Seattle",
+    country: "United States",
+    nextMatchId: "M98",
+  },
+  {
+    id: "M95",
+    date: "2026-07-07",
+    kickoffUTC: "2026-07-07T16:00:00Z",
+    teamA: "Argentina",
+    teamB: "Egypt",
+    venue: "Atlanta Stadium",
+    city: "Atlanta",
+    country: "United States",
+    nextMatchId: "M100",
+  },
+  {
+    id: "M96",
+    date: "2026-07-07",
+    kickoffUTC: "2026-07-07T20:00:00Z",
+    teamA: "Switzerland",
+    teamB: "Colombia",
+    venue: "BC Place Vancouver",
+    city: "Vancouver",
+    country: "Canada",
+    nextMatchId: "M100",
+  },
+];
+
+export const quarterFinalPaths: Record<string, [string, string]> = {
+  M97: ["M89", "M90"],
+  M98: ["M93", "M94"],
+  M99: ["M91", "M92"],
+  M100: ["M95", "M96"],
+};
 
 // Static official fixture source. The pairings use FIFA's group-position pattern:
 // MD1: 1v2 and 3v4, MD2: 1v3 and 4v2, MD3: 4v1 and 2v3.
@@ -149,6 +260,18 @@ export const groupFixtures: WorldCupFixture[] = groupScheduleSeeds.flatMap((seed
 );
 
 export const roundOf32Fixtures: WorldCupFixture[] = roundOf32FixtureSeeds.map((seed) => {
+  return toKnockoutFixture(seed, "round_of_32");
+});
+
+export const roundOf16Fixtures: WorldCupFixture[] = roundOf16FixtureSeeds.map((seed) => {
+  return toKnockoutFixture(seed, "round_of_16");
+});
+
+export const worldCup2026Fixtures: WorldCupFixture[] = [...groupFixtures, ...roundOf32Fixtures, ...roundOf16Fixtures];
+
+export const officialTeamGroups = Object.fromEntries(worldCup2026Teams.map((team) => [team.code, team.group]));
+
+function toKnockoutFixture(seed: KnockoutFixtureSeed, stage: "round_of_32" | "round_of_16"): WorldCupFixture {
   const homeTeam = findTeamByNameOrAlias(seed.teamA);
   const awayTeam = findTeamByNameOrAlias(seed.teamB);
   if (!homeTeam || !awayTeam) {
@@ -157,10 +280,13 @@ export const roundOf32Fixtures: WorldCupFixture[] = roundOf32FixtureSeeds.map((s
   return {
     id: seed.id,
     fifaMatchNumber: Number(seed.id.replace("M", "")),
-    stage: "round_of_32",
+    stage,
     date: seed.date,
+    kickoffUTC: seed.kickoffUTC,
     venue: seed.venue,
     city: seed.city,
+    country: seed.country,
+    nextMatchId: seed.nextMatchId,
     homeTeam: {
       name: homeTeam.name,
       code: homeTeam.code,
@@ -176,14 +302,16 @@ export const roundOf32Fixtures: WorldCupFixture[] = roundOf32FixtureSeeds.map((s
     sourceUrl: OFFICIAL_FIFA_FIXTURE_SOURCE_URL,
     verified: true,
   };
-});
-
-export const worldCup2026Fixtures: WorldCupFixture[] = [...groupFixtures, ...roundOf32Fixtures];
-
-export const officialTeamGroups = Object.fromEntries(worldCup2026Teams.map((team) => [team.code, team.group]));
+}
 
 function findTeamByNameOrAlias(name: string) {
-  const aliases = [name, ...(teamAliases[name] ?? [])];
+  const aliases = new Set([name, ...(teamAliases[name] ?? [])]);
+  for (const [canonicalName, canonicalAliases] of Object.entries(teamAliases)) {
+    const names = [canonicalName, ...canonicalAliases];
+    if (names.some((alias) => normalizeName(alias) === normalizeName(name))) {
+      names.forEach((alias) => aliases.add(alias));
+    }
+  }
   for (const alias of aliases) {
     const byCode = worldCup2026TeamsByCode[alias];
     if (byCode) return byCode;

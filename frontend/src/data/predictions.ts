@@ -34,13 +34,14 @@ function generatePredictionForFixture(fixture: WorldCupFixture): Prediction {
 
   const modelPrediction = predictFixture(fixture, homeTeam, awayTeam);
   const recommendedScore = `${modelPrediction.predictedScore.home}–${modelPrediction.predictedScore.away}`;
-  const knockout = fixture.stage === "round_of_32"
+  const knockout = isKnockoutStage(fixture.stage)
     ? calculateAdvanceProbabilities(
         modelPrediction.probabilities,
         homeTeam.eloRating,
         awayTeam.eloRating,
         homeTeam,
         awayTeam,
+        fixture.nextMatchId,
       )
     : undefined;
 
@@ -90,6 +91,7 @@ function calculateAdvanceProbabilities(
   teamBStrength: number,
   teamA: Team,
   teamB: Team,
+  nextMatchId?: string,
 ) {
   const safeTeamAStrength = Math.max(0, teamAStrength);
   const safeTeamBStrength = Math.max(0, teamBStrength);
@@ -108,7 +110,12 @@ function calculateAdvanceProbabilities(
     advanceProbability,
     advanceLabel: `${predictedToAdvance.name} to advance`,
     note: "Advancement probability allocates the 90-minute draw chance by team Elo strength.",
+    nextMatchId,
   };
+}
+
+function isKnockoutStage(stage: WorldCupFixture["stage"]) {
+  return stage !== "group";
 }
 
 function stageLabel(stage: WorldCupFixture["stage"]) {

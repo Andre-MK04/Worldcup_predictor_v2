@@ -87,3 +87,11 @@ M85,2026-07-02,12:00,,round_of_32,Switzerland,Algeria,SUI,ALG,BC Place Vancouver
 M88,2026-07-03,12:00,,round_of_32,Australia,Egypt,AUS,EGY,Dallas Stadium,scheduled,true,88
 M86,2026-07-03,12:00,,round_of_32,Argentina,Cabo Verde,ARG,CPV,Miami Stadium,scheduled,true,86
 M87,2026-07-03,12:00,,round_of_32,Colombia,Ghana,COL,GHA,Kansas City Stadium,scheduled,true,87
+M90,2026-07-04,17:00,,round_of_16,Canada,Morocco,CAN,MAR,Houston Stadium,scheduled,true,90
+M89,2026-07-04,21:00,,round_of_16,Paraguay,France,PAR,FRA,Philadelphia Stadium,scheduled,true,89
+M91,2026-07-05,20:00,,round_of_16,Brazil,Norway,BRA,NOR,New York New Jersey Stadium,scheduled,true,91
+M92,2026-07-06,00:00,,round_of_16,Mexico,England,MEX,ENG,Mexico City Stadium,scheduled,true,92
+M93,2026-07-06,19:00,,round_of_16,Portugal,Spain,POR,ESP,Dallas Stadium,scheduled,true,93
+M94,2026-07-07,00:00,,round_of_16,United States,Belgium,USA,BEL,Seattle Stadium,scheduled,true,94
+M95,2026-07-07,16:00,,round_of_16,Argentina,Egypt,ARG,EGY,Atlanta Stadium,scheduled,true,95
+M96,2026-07-07,20:00,,round_of_16,Switzerland,Colombia,SUI,COL,BC Place Vancouver,scheduled,true,96

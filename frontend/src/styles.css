@@ -1136,6 +1136,222 @@ a {
   gap: 18px;
 }
 
+.performance-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, auto);
+  gap: 24px;
+  align-items: end;
+}
+
+.performance-actions {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.performance-actions span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.performance-actions button,
+.performance-filters input,
+.performance-filters select {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  padding: 0 12px;
+  background: rgba(245, 239, 225, 0.08);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.performance-actions button:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.performance-summary-grid,
+.performance-chart-grid,
+.performance-two-column,
+.performance-card-list {
+  display: grid;
+  gap: 12px;
+}
+
+.performance-summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.performance-chart-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.performance-two-column {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.performance-filters {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) repeat(4, minmax(130px, 1fr)) repeat(2, minmax(120px, 0.8fr));
+  gap: 10px;
+}
+
+.performance-chart,
+.performance-result-card,
+.evaluation-card {
+  border: 1px solid var(--line);
+  padding: 14px;
+  background: rgba(245, 239, 225, 0.035);
+}
+
+.performance-chart h3 {
+  margin: 0 0 14px;
+  color: var(--off-white);
+  font-size: 1rem;
+}
+
+.chart-bars {
+  display: grid;
+  gap: 12px;
+}
+
+.chart-bar-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.7fr) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.chart-bar-row div:first-child span,
+.performance-result-card span,
+.evaluation-card dt {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.chart-bar-row div:first-child strong,
+.chart-bar-row em {
+  color: var(--off-white);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.chart-track {
+  height: 12px;
+  overflow: hidden;
+  background: rgba(245, 239, 225, 0.1);
+}
+
+.chart-fill {
+  display: block;
+  height: 100%;
+}
+
+.chart-fill.success {
+  background: var(--teal);
+}
+
+.chart-fill.gold {
+  background: var(--gold);
+}
+
+.chart-fill.muted {
+  background: rgba(245, 239, 225, 0.28);
+}
+
+.performance-result-card {
+  display: grid;
+  gap: 10px;
+}
+
+.performance-result-card.exact {
+  border-color: rgba(245, 189, 63, 0.5);
+  background: rgba(245, 189, 63, 0.08);
+}
+
+.performance-result-card strong,
+.evaluation-card-title strong {
+  color: var(--off-white);
+}
+
+.performance-result-card p,
+.evaluation-card small {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.performance-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-chip {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--line);
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.status-chip.success {
+  border-color: rgba(68, 197, 167, 0.5);
+  color: var(--teal);
+}
+
+.status-chip.gold {
+  border-color: rgba(245, 189, 63, 0.58);
+  color: var(--gold);
+}
+
+.status-chip.warning {
+  border-color: rgba(242, 77, 66, 0.5);
+  color: var(--red);
+}
+
+.status-chip.muted {
+  color: var(--muted);
+}
+
+.evaluation-card-list {
+  display: none;
+}
+
+.evaluation-card {
+  display: grid;
+  gap: 12px;
+}
+
+.evaluation-card.exact {
+  border-color: rgba(245, 189, 63, 0.5);
+}
+
+.evaluation-card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.evaluation-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.evaluation-card dd {
+  margin: 3px 0 0;
+  color: var(--off-white);
+  font-weight: 850;
+}
+
 .evaluation-table {
   display: grid;
   gap: 0;
@@ -1151,7 +1367,8 @@ a {
     minmax(150px, 0.9fr)
     80px
     80px
-    minmax(180px, 1fr);
+    80px
+    minmax(120px, 0.8fr);
   gap: 12px;
   align-items: center;
   min-width: 1080px;
@@ -1871,6 +2088,38 @@ a {
     gap: 10px;
   }
 
+  .performance-header,
+  .performance-two-column,
+  .performance-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-actions {
+    justify-items: start;
+  }
+
+  .performance-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .performance-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .performance-evaluation-table {
+    display: none;
+  }
+
+  .evaluation-card-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .chart-bar-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .performance-page .metric-card {
     min-width: 0;
     border: 1px solid var(--line);
@@ -2003,6 +2252,12 @@ a {
   }
 
   .performance-page .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-summary-grid,
+  .performance-filters,
+  .evaluation-card dl {
     grid-template-columns: 1fr;
   }
 

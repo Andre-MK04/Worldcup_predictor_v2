@@ -95,6 +95,17 @@ ROUND_OF_32_FIXTURES = [
     ("M87", "2026-07-03", "COL", "GHA", "Kansas City Stadium"),
 ]
 
+ROUND_OF_16_FIXTURES = [
+    ("M90", "2026-07-04", "17:00", "CAN", "MAR", "Houston Stadium"),
+    ("M89", "2026-07-04", "21:00", "PAR", "FRA", "Philadelphia Stadium"),
+    ("M91", "2026-07-05", "20:00", "BRA", "NOR", "New York New Jersey Stadium"),
+    ("M92", "2026-07-06", "00:00", "MEX", "ENG", "Mexico City Stadium"),
+    ("M93", "2026-07-06", "19:00", "POR", "ESP", "Dallas Stadium"),
+    ("M94", "2026-07-07", "00:00", "USA", "BEL", "Seattle Stadium"),
+    ("M95", "2026-07-07", "16:00", "ARG", "EGY", "Atlanta Stadium"),
+    ("M96", "2026-07-07", "20:00", "SUI", "COL", "BC Place Vancouver"),
+]
+
 
 def build_static_group_fixtures() -> list[dict[str, str]]:
     fixtures: list[dict[str, str]] = []
@@ -127,6 +138,24 @@ def build_static_group_fixtures() -> list[dict[str, str]]:
                 "kickoff_time": "12:00",
                 "group": "",
                 "stage": "round_of_32",
+                "team_a": TEAM_NAMES[team_a],
+                "team_b": TEAM_NAMES[team_b],
+                "team_a_code": team_a,
+                "team_b_code": team_b,
+                "venue": venue,
+                "status": "scheduled",
+                "is_neutral_venue": "true",
+                "fifa_match_number": match_id.removeprefix("M"),
+            }
+        )
+    for match_id, date, kickoff_time, team_a, team_b, venue in ROUND_OF_16_FIXTURES:
+        fixtures.append(
+            {
+                "match_id": match_id,
+                "date": date,
+                "kickoff_time": kickoff_time,
+                "group": "",
+                "stage": "round_of_16",
                 "team_a": TEAM_NAMES[team_a],
                 "team_b": TEAM_NAMES[team_b],
                 "team_a_code": team_a,
