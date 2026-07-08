@@ -122,7 +122,7 @@ export function Performance({ evaluation, apiAvailable, onRecalculate, predictio
         <div className="section-heading">
           <span>Filters</span>
           <strong>
-            {filteredDashboardComparisons.length} / {dashboardComparisons.length} group + Round of 32 predictions
+            {filteredDashboardComparisons.length} / {dashboardComparisons.length} tracked predictions
           </strong>
         </div>
         <div className="performance-filters">
@@ -208,11 +208,11 @@ function DashboardPredictionSummary({ comparisons }: { comparisons: DashboardCom
       <div className="section-heading">
         <span>Predictions tab comparison</span>
         <strong>
-          {total} scored / {comparisons.length} group + Round of 32 predictions
+          {total} scored / {comparisons.length} tracked predictions
         </strong>
       </div>
       <p className="empty-note">
-        This starts from every Predictions-tab group-stage and Round of 32 match. Matches without an imported actual
+        This starts from every Predictions-tab match through the quarter-finals. Matches without an imported actual
         score are shown as unavailable and are not counted in the percentages.
       </p>
       <div className="performance-summary-grid">
@@ -363,7 +363,7 @@ function DashboardPredictionComparison({ comparisons }: { comparisons: Dashboard
 function buildDashboardComparisons(matches: MatchEvaluation[], predictions: Prediction[]): DashboardComparison[] {
   const comparisons: DashboardComparison[] = [];
   predictions
-    .filter((prediction) => prediction.stage === "group" || prediction.stage === "round_of_32")
+    .filter((prediction) => ["group", "round_of_32", "round_of_16", "quarter_final"].includes(prediction.stage))
     .forEach((prediction) => {
     const resultMatch = findResultForPrediction(prediction, matches);
     const match = buildComparisonMatch(prediction, resultMatch);

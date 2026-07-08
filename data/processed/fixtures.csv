@@ -95,3 +95,7 @@ M93,2026-07-06,19:00,,round_of_16,Portugal,Spain,POR,ESP,Dallas Stadium,schedule
 M94,2026-07-07,00:00,,round_of_16,United States,Belgium,USA,BEL,Seattle Stadium,scheduled,true,94
 M95,2026-07-07,16:00,,round_of_16,Argentina,Egypt,ARG,EGY,Atlanta Stadium,scheduled,true,95
 M96,2026-07-07,20:00,,round_of_16,Switzerland,Colombia,SUI,COL,BC Place Vancouver,scheduled,true,96
+M97,2026-07-09,20:00,,quarter_final,France,Morocco,FRA,MAR,Boston Stadium,scheduled,true,97
+M98,2026-07-10,19:00,,quarter_final,Spain,Belgium,ESP,BEL,Los Angeles Stadium,scheduled,true,98
+M99,2026-07-11,21:00,,quarter_final,Norway,England,NOR,ENG,Miami Stadium,scheduled,true,99
+M100,2026-07-12,01:00,,quarter_final,Argentina,Switzerland,ARG,SUI,Kansas City Stadium,scheduled,true,100

@@ -221,6 +221,53 @@ export const quarterFinalPaths: Record<string, [string, string]> = {
   M100: ["M95", "M96"],
 };
 
+export const quarterFinalFixtureSeeds: KnockoutFixtureSeed[] = [
+  {
+    id: "M97",
+    date: "2026-07-09",
+    kickoffUTC: "2026-07-09T20:00:00Z",
+    teamA: "France",
+    teamB: "Morocco",
+    venue: "Boston Stadium",
+    city: "Boston",
+    country: "United States",
+    nextMatchId: "M101",
+  },
+  {
+    id: "M98",
+    date: "2026-07-10",
+    kickoffUTC: "2026-07-10T19:00:00Z",
+    teamA: "Spain",
+    teamB: "Belgium",
+    venue: "Los Angeles Stadium",
+    city: "Los Angeles",
+    country: "United States",
+    nextMatchId: "M101",
+  },
+  {
+    id: "M99",
+    date: "2026-07-11",
+    kickoffUTC: "2026-07-11T21:00:00Z",
+    teamA: "Norway",
+    teamB: "England",
+    venue: "Miami Stadium",
+    city: "Miami",
+    country: "United States",
+    nextMatchId: "M102",
+  },
+  {
+    id: "M100",
+    date: "2026-07-12",
+    kickoffUTC: "2026-07-12T01:00:00Z",
+    teamA: "Argentina",
+    teamB: "Switzerland",
+    venue: "Kansas City Stadium",
+    city: "Kansas City",
+    country: "United States",
+    nextMatchId: "M102",
+  },
+];
+
 // Static official fixture source. The pairings use FIFA's group-position pattern:
 // MD1: 1v2 and 3v4, MD2: 1v3 and 4v2, MD3: 4v1 and 2v3.
 // Do not add generated or guessed teams here; unresolved knockout teams should be placeholders.
@@ -267,11 +314,20 @@ export const roundOf16Fixtures: WorldCupFixture[] = roundOf16FixtureSeeds.map((s
   return toKnockoutFixture(seed, "round_of_16");
 });
 
-export const worldCup2026Fixtures: WorldCupFixture[] = [...groupFixtures, ...roundOf32Fixtures, ...roundOf16Fixtures];
+export const quarterFinalFixtures: WorldCupFixture[] = quarterFinalFixtureSeeds.map((seed) => {
+  return toKnockoutFixture(seed, "quarter_final");
+});
+
+export const worldCup2026Fixtures: WorldCupFixture[] = [
+  ...groupFixtures,
+  ...roundOf32Fixtures,
+  ...roundOf16Fixtures,
+  ...quarterFinalFixtures,
+];
 
 export const officialTeamGroups = Object.fromEntries(worldCup2026Teams.map((team) => [team.code, team.group]));
 
-function toKnockoutFixture(seed: KnockoutFixtureSeed, stage: "round_of_32" | "round_of_16"): WorldCupFixture {
+function toKnockoutFixture(seed: KnockoutFixtureSeed, stage: "round_of_32" | "round_of_16" | "quarter_final"): WorldCupFixture {
   const homeTeam = findTeamByNameOrAlias(seed.teamA);
   const awayTeam = findTeamByNameOrAlias(seed.teamB);
   if (!homeTeam || !awayTeam) {

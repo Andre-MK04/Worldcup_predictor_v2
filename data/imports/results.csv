@@ -87,3 +87,11 @@ M85,2026-07-02,,round_of_32,Switzerland,Algeria,complete,2,0,Switzerland,team_a_
 M88,2026-07-03,,round_of_32,Australia,Egypt,complete,1,1,Draw,draw,2,true,false,2026-07-04T14:45:00+00:00
 M86,2026-07-03,,round_of_32,Argentina,Cabo Verde,complete,3,2,Argentina,team_a_win,5,true,true,2026-07-04T14:45:00+00:00
 M87,2026-07-03,,round_of_32,Colombia,Ghana,complete,1,0,Colombia,team_a_win,1,false,false,2026-07-04T14:45:00+00:00
+M90,2026-07-04,,round_of_16,Canada,Morocco,complete,0,3,Morocco,team_b_win,3,false,true,2026-07-08T10:20:00+00:00
+M89,2026-07-04,,round_of_16,Paraguay,France,complete,0,1,France,team_b_win,1,false,false,2026-07-08T10:20:00+00:00
+M91,2026-07-05,,round_of_16,Brazil,Norway,complete,1,2,Norway,team_b_win,3,true,true,2026-07-08T10:20:00+00:00
+M92,2026-07-06,,round_of_16,Mexico,England,complete,2,3,England,team_b_win,5,true,true,2026-07-08T10:20:00+00:00
+M93,2026-07-06,,round_of_16,Portugal,Spain,complete,0,1,Spain,team_b_win,1,false,false,2026-07-08T10:20:00+00:00
+M94,2026-07-07,,round_of_16,United States,Belgium,complete,1,4,Belgium,team_b_win,5,true,true,2026-07-08T10:20:00+00:00
+M95,2026-07-07,,round_of_16,Argentina,Egypt,complete,3,2,Argentina,team_a_win,5,true,true,2026-07-08T10:20:00+00:00
+M96,2026-07-07,,round_of_16,Switzerland,Colombia,complete,0,0,Draw,draw,0,false,false,2026-07-08T10:20:00+00:00

@@ -106,6 +106,13 @@ ROUND_OF_16_FIXTURES = [
     ("M96", "2026-07-07", "20:00", "SUI", "COL", "BC Place Vancouver"),
 ]
 
+QUARTER_FINAL_FIXTURES = [
+    ("M97", "2026-07-09", "20:00", "FRA", "MAR", "Boston Stadium"),
+    ("M98", "2026-07-10", "19:00", "ESP", "BEL", "Los Angeles Stadium"),
+    ("M99", "2026-07-11", "21:00", "NOR", "ENG", "Miami Stadium"),
+    ("M100", "2026-07-12", "01:00", "ARG", "SUI", "Kansas City Stadium"),
+]
+
 
 def build_static_group_fixtures() -> list[dict[str, str]]:
     fixtures: list[dict[str, str]] = []
@@ -156,6 +163,24 @@ def build_static_group_fixtures() -> list[dict[str, str]]:
                 "kickoff_time": kickoff_time,
                 "group": "",
                 "stage": "round_of_16",
+                "team_a": TEAM_NAMES[team_a],
+                "team_b": TEAM_NAMES[team_b],
+                "team_a_code": team_a,
+                "team_b_code": team_b,
+                "venue": venue,
+                "status": "scheduled",
+                "is_neutral_venue": "true",
+                "fifa_match_number": match_id.removeprefix("M"),
+            }
+        )
+    for match_id, date, kickoff_time, team_a, team_b, venue in QUARTER_FINAL_FIXTURES:
+        fixtures.append(
+            {
+                "match_id": match_id,
+                "date": date,
+                "kickoff_time": kickoff_time,
+                "group": "",
+                "stage": "quarter_final",
                 "team_a": TEAM_NAMES[team_a],
                 "team_b": TEAM_NAMES[team_b],
                 "team_a_code": team_a,
