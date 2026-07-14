@@ -10,5 +10,7 @@
 - SB Nation, "2026 World Cup Round of 16: Full schedule and scores", updated July 8, 2026. Used for Round of 16 scores from July 4 through July 7 and confirmed the eight quarter-finalists.
 - SB Nation, "World Cup 2026: Quarterfinals matches, potential Semifinal fixtures", updated July 8, 2026. Used for confirmed quarter-final matchups and semifinal paths.
 - FIFA/host-stadium schedule tables mirrored in venue pages for Boston Stadium, Los Angeles Stadium, Miami Stadium and Kansas City Stadium. Used for quarter-final match IDs, dates, venues and UTC kickoffs.
+- SB Nation, "World Cup 2026: Quarterfinals schedule and scores", updated July 12, 2026. Used for quarter-final scores: France 2-0 Morocco, Spain 2-1 Belgium, England 2-1 Norway, Argentina 3-1 Switzerland.
+- Houston Chronicle/AP semifinal previews, published July 14, 2026. Used to confirm semifinal matchups France vs Spain and England vs Argentina, plus Arlington/Dallas and Atlanta host cities.
 
 These rows are actual result imports, not regenerated predictions. They update standings only. They do not make completed matches eligible for model evaluation unless a pre-kickoff prediction snapshot exists.
