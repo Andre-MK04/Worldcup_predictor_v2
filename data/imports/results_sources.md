@@ -12,5 +12,9 @@
 - FIFA/host-stadium schedule tables mirrored in venue pages for Boston Stadium, Los Angeles Stadium, Miami Stadium and Kansas City Stadium. Used for quarter-final match IDs, dates, venues and UTC kickoffs.
 - SB Nation, "World Cup 2026: Quarterfinals schedule and scores", updated July 12, 2026. Used for quarter-final scores: France 2-0 Morocco, Spain 2-1 Belgium, England 2-1 Norway, Argentina 3-1 Switzerland.
 - Houston Chronicle/AP semifinal previews, published July 14, 2026. Used to confirm semifinal matchups France vs Spain and England vs Argentina, plus Arlington/Dallas and Atlanta host cities.
+- The Guardian, "France 0-2 Spain: World Cup 2026 semi-final - as it happened", published July 15, 2026. Used for Spain 2-0 France and Spain reaching the final.
+- The Guardian/talkSPORT live semifinal coverage, published July 15, 2026. Used for Argentina 2-1 England and Argentina reaching the final.
+- talkSPORT, "Is there a third-place playoff match at the 2026 World Cup?", updated July 15, 2026. Used for the third-place match date, kickoff and Miami venue.
+- The Sun, "Who will England play in the World Cup 2026 final if they beat Argentina?", updated July 15, 2026. Used for the final date, kickoff and New York/New Jersey venue.
 
 These rows are actual result imports, not regenerated predictions. They update standings only. They do not make completed matches eligible for model evaluation unless a pre-kickoff prediction snapshot exists.

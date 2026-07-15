@@ -118,6 +118,11 @@ SEMI_FINAL_FIXTURES = [
     ("M102", "2026-07-15", "19:00", "ENG", "ARG", "Atlanta Stadium"),
 ]
 
+FINAL_ROUND_FIXTURES = [
+    ("M103", "2026-07-18", "21:00", "FRA", "ENG", "Miami Stadium", "third_place"),
+    ("M104", "2026-07-19", "19:00", "ESP", "ARG", "New York New Jersey Stadium", "final"),
+]
+
 
 def build_static_group_fixtures() -> list[dict[str, str]]:
     fixtures: list[dict[str, str]] = []
@@ -204,6 +209,24 @@ def build_static_group_fixtures() -> list[dict[str, str]]:
                 "kickoff_time": kickoff_time,
                 "group": "",
                 "stage": "semi_final",
+                "team_a": TEAM_NAMES[team_a],
+                "team_b": TEAM_NAMES[team_b],
+                "team_a_code": team_a,
+                "team_b_code": team_b,
+                "venue": venue,
+                "status": "scheduled",
+                "is_neutral_venue": "true",
+                "fifa_match_number": match_id.removeprefix("M"),
+            }
+        )
+    for match_id, date, kickoff_time, team_a, team_b, venue, stage in FINAL_ROUND_FIXTURES:
+        fixtures.append(
+            {
+                "match_id": match_id,
+                "date": date,
+                "kickoff_time": kickoff_time,
+                "group": "",
+                "stage": stage,
                 "team_a": TEAM_NAMES[team_a],
                 "team_b": TEAM_NAMES[team_b],
                 "team_a_code": team_a,

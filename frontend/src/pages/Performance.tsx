@@ -212,7 +212,7 @@ function DashboardPredictionSummary({ comparisons }: { comparisons: DashboardCom
         </strong>
       </div>
       <p className="empty-note">
-        This starts from every Predictions-tab match through the semi-finals. Matches without an imported actual
+        This starts from every Predictions-tab match through the final. Matches without an imported actual
         score are shown as unavailable and are not counted in the percentages.
       </p>
       <div className="performance-summary-grid">
@@ -363,7 +363,11 @@ function DashboardPredictionComparison({ comparisons }: { comparisons: Dashboard
 function buildDashboardComparisons(matches: MatchEvaluation[], predictions: Prediction[]): DashboardComparison[] {
   const comparisons: DashboardComparison[] = [];
   predictions
-    .filter((prediction) => ["group", "round_of_32", "round_of_16", "quarter_final", "semi_final"].includes(prediction.stage))
+    .filter((prediction) =>
+      ["group", "round_of_32", "round_of_16", "quarter_final", "semi_final", "third_place", "final"].includes(
+        prediction.stage,
+      ),
+    )
     .forEach((prediction) => {
     const resultMatch = findResultForPrediction(prediction, matches);
     const match = buildComparisonMatch(prediction, resultMatch);

@@ -99,3 +99,5 @@ M97,2026-07-09,,quarter_final,France,Morocco,complete,2,0,France,team_a_win,2,fa
 M98,2026-07-10,,quarter_final,Spain,Belgium,complete,2,1,Spain,team_a_win,3,true,true,2026-07-14T10:00:00+00:00
 M99,2026-07-11,,quarter_final,Norway,England,complete,1,2,England,team_b_win,3,true,true,2026-07-14T10:00:00+00:00
 M100,2026-07-12,,quarter_final,Argentina,Switzerland,complete,3,1,Argentina,team_a_win,4,true,true,2026-07-14T10:00:00+00:00
+M101,2026-07-14,,semi_final,France,Spain,complete,0,2,Spain,team_b_win,2,false,false,2026-07-15T21:30:00+00:00
+M102,2026-07-15,,semi_final,England,Argentina,complete,1,2,Argentina,team_b_win,3,true,true,2026-07-15T21:30:00+00:00

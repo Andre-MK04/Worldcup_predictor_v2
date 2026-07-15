@@ -293,6 +293,32 @@ export const semiFinalFixtureSeeds: KnockoutFixtureSeed[] = [
   },
 ];
 
+export const thirdPlaceFixtureSeeds: KnockoutFixtureSeed[] = [
+  {
+    id: "M103",
+    date: "2026-07-18",
+    kickoffUTC: "2026-07-18T21:00:00Z",
+    teamA: "France",
+    teamB: "England",
+    venue: "Miami Stadium",
+    city: "Miami",
+    country: "United States",
+  },
+];
+
+export const finalFixtureSeeds: KnockoutFixtureSeed[] = [
+  {
+    id: "M104",
+    date: "2026-07-19",
+    kickoffUTC: "2026-07-19T19:00:00Z",
+    teamA: "Spain",
+    teamB: "Argentina",
+    venue: "New York New Jersey Stadium",
+    city: "New York/New Jersey",
+    country: "United States",
+  },
+];
+
 // Static official fixture source. The pairings use FIFA's group-position pattern:
 // MD1: 1v2 and 3v4, MD2: 1v3 and 4v2, MD3: 4v1 and 2v3.
 // Do not add generated or guessed teams here; unresolved knockout teams should be placeholders.
@@ -347,19 +373,29 @@ export const semiFinalFixtures: WorldCupFixture[] = semiFinalFixtureSeeds.map((s
   return toKnockoutFixture(seed, "semi_final");
 });
 
+export const thirdPlaceFixtures: WorldCupFixture[] = thirdPlaceFixtureSeeds.map((seed) => {
+  return toKnockoutFixture(seed, "third_place");
+});
+
+export const finalFixtures: WorldCupFixture[] = finalFixtureSeeds.map((seed) => {
+  return toKnockoutFixture(seed, "final");
+});
+
 export const worldCup2026Fixtures: WorldCupFixture[] = [
   ...groupFixtures,
   ...roundOf32Fixtures,
   ...roundOf16Fixtures,
   ...quarterFinalFixtures,
   ...semiFinalFixtures,
+  ...thirdPlaceFixtures,
+  ...finalFixtures,
 ];
 
 export const officialTeamGroups = Object.fromEntries(worldCup2026Teams.map((team) => [team.code, team.group]));
 
 function toKnockoutFixture(
   seed: KnockoutFixtureSeed,
-  stage: "round_of_32" | "round_of_16" | "quarter_final" | "semi_final",
+  stage: "round_of_32" | "round_of_16" | "quarter_final" | "semi_final" | "third_place" | "final",
 ): WorldCupFixture {
   const homeTeam = findTeamByNameOrAlias(seed.teamA);
   const awayTeam = findTeamByNameOrAlias(seed.teamB);
